@@ -1,32 +1,67 @@
 import React from "react";
-import { Card, Button, Image } from "semantic-ui-react";
+import { Card, Divider, Header, Icon, Table } from "semantic-ui-react";
 
 import ArtHeader from "./ArtHeader";
 
 const ArtCard = (props) => {
   return(
-    <Card.Group>
-      <Card fluid>
-        <Card.Content>
-          <Card.Header>{props.artist}</Card.Header>
-          <Card.Meta>
-            {`${props.artistBday} - ${props.artistDeath}, ${props.artistNationality}`}
-          </Card.Meta>
-          <Card.Description>
-            Steve wants to add you to the group <strong>best friends</strong>
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <div className='ui' color="black">
-          </div>
-        </Card.Content>
-        <Card.Content extra>
-          <div className='ui'>
-            <ArtHeader tags={ props.artTags || [] } />
-          </div>
-        </Card.Content>
-      </Card>
-    </Card.Group>
+    <React.Fragment>
+      <Divider horizontal>
+        <Header as='h4'>
+          <Icon name='list alternate outline' />
+          Description
+        </Header>
+      </Divider>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
+        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
+        aliquip ex ea commodo consequat.
+      </p>
+
+      <Divider horizontal>
+        <Header as='h4'>
+          <Icon name='sliders horizontal' />
+          Specifications
+        </Header>
+      </Divider>
+
+      <Table definition>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell width={2}>Size</Table.Cell>
+            <Table.Cell>{props.artDimensions}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Type</Table.Cell>
+            <Table.Cell>{props.type}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Materials</Table.Cell>
+            <Table.Cell>{props.artMedium}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Credits</Table.Cell>
+            <Table.Cell>{props.artCreditLine}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Created/Found In</Table.Cell>
+            <Table.Cell>{props.artCountry}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Artist</Table.Cell>
+            <Table.Cell>{`${props.artist}, ${props.artistNationality}`}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Tags</Table.Cell>
+            <Table.Cell>
+              <ArtHeader image={props.image} tags={props.artTags || []} />
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </React.Fragment>
   )
 }
 

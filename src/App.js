@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Twitter from "twitter"
 import { Container, Grid, Segment, Menu, Image } from "semantic-ui-react";
 import Art from "./Art";
 import Logo from "../public/logo/artizan_logo.png"
@@ -12,8 +13,7 @@ function App() {
     fetch(API_URL + artId)
     .then(res => res.json())
     .then(res => {
-      if( !res.tags || (res.artistDisplayName==="" && res.title==="") ||
-        !res.primaryImageSmall && !res.primaryImage ) {
+      if(!res.artistDisplayName || !res.title || !res.tags || !res.primaryImage) {
         setArtId(Math.floor(Math.random() * 500000) + 1)
       } else {
         setCollection(res)
@@ -24,7 +24,6 @@ function App() {
 
   const {
     primaryImage,
-    primaryImageSmall,
     additionalImages,
     department,
     objectName,
@@ -49,7 +48,7 @@ function App() {
   } = collection
 
   return(
-    <Grid columns={1} divided padded>
+    <Grid columns={1} divided>
       <Grid.Row stretched>
         <Grid.Column>
           <Container>
@@ -61,10 +60,7 @@ function App() {
               </Menu.Item>
             </Menu>
             <Art
-              image={
-                primaryImageSmall || 
-                primaryImage
-              }
+              image={primaryImage}
               title={title}
               department={department}
               type={objectName}

@@ -4,12 +4,11 @@ import { Label } from "semantic-ui-react"
 const ArtHeader = ((props) => {
   return(
     <div>
-      <h4>Tags:</h4>
       {
         props.tags.map((tag, i) => {
           return(
             <Label key={i} as='a' color='teal' image>
-              <img src='https://react.semantic-ui.com/images/avatar/small/veronika.jpg' />
+              <img src="https://react.semantic-ui.com/images/avatar/small/veronika.jpg" />
               <span id={i}>{tag}</span>
             </Label>
           )
