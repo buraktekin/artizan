@@ -1,7 +1,7 @@
 import React from "react"
 import ErrorBoundary from "./ErrorBoundary";
 import 'semantic-ui-css/semantic.min.css'
-import { Grid, TextArea } from "semantic-ui-react";
+import { Grid, TextArea, Image } from "semantic-ui-react";
 
 import ArtCard from "./ArtCard";
 
@@ -31,17 +31,20 @@ const Art = ((props) => {
   } = props
 
   return(
-    <Grid divided='vertically' padded="horizontally">
-      <Grid.Row columns={2} verticalAlign="middle">
-        <Grid.Column textAlign="center">
-          <img src={image} height='100%'/>
+    <Grid divided='vertically'>
+      <Grid.Row stretched centered>
+        <Grid.Column >
+          <Image src={image} size="medium" />
         </Grid.Column>
-        <Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column floated="right" width="6">
           <div className="Art">
-            <h1>{`${title} (${artCreationStart} - ${artCreationEnd})`}</h1>
+            <h4>{`${title} (${artCreationStart} - ${artCreationEnd})`}</h4>
             <ArtCard 
               type={type}
               artTags={artTags}
+              artMedium={artMedium}
               artCreatedAt={artCreatedAt || ""}
               department={department}
               artist={artist}
@@ -49,7 +52,6 @@ const Art = ((props) => {
               artistDeath={artistDeath || ""}
               artistNationality={artistNationality || ""}
             />
-            <h3>{artMedium}</h3>
           </div>
         </Grid.Column>
       </Grid.Row>
