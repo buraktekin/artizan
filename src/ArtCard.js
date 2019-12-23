@@ -42,16 +42,16 @@ const ArtCard = (props) => {
             <Table.Cell>{props.artMedium}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Credits</Table.Cell>
-            <Table.Cell>{props.artCreditLine}</Table.Cell>
-          </Table.Row>
-          <Table.Row>
             <Table.Cell>Created/Found In</Table.Cell>
             <Table.Cell>{props.artCountry}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Artist</Table.Cell>
             <Table.Cell>{`${props.artist}, ${props.artistNationality}`}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Credits</Table.Cell>
+            <Table.Cell>{props.artCreditLine}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Tags</Table.Cell>

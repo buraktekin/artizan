@@ -39,36 +39,34 @@ export default class Art extends React.Component {
     return(
       <Grid divided="vertically">
         <Grid.Row columns={2}>
-          <Grid.Column verticalAlign="middle" width="11" stretched>
+          <Grid.Column verticalAlign="middle" stretched>
             <a href={this.props.artOriginURL}>
               <Image src={this.props.image} wrapped centered/>
             </a>
           </Grid.Column>
-          <Grid.Column width="5" stretched>
+          <Grid.Column stretched>
             <Ref innerRef={this.contextRef}>
-              <Segment>
-                <Rail>
-                  <Sticky context={this.contextRef} pushing>
-                    <div className="Art">
-                      <h2>{`${this.props.title} (${this.props.artCreationStart} - ${this.props.artCreationEnd})`}</h2>
-                      <ArtCard 
-                        type={this.props.type}
-                        image={this.props.image}
-                        artTags={this.props.artTags}
-                        artMedium={this.props.artMedium}
-                        artDimensions={this.props.artDimensions}
-                        artCreatedAt={this.props.artCreatedAt || ""}
-                        artCreditLine={this.props.artCreditLine}
-                        artCountry={this.props.artCountry}
-                        department={this.props.department}
-                        artist={this.props.artist}
-                        artistBday={this.props.artistBday || ""}
-                        artistDeath={this.props.artistDeath || ""}
-                        artistNationality={this.props.artistNationality || ""}
-                      />
-                    </div>
-                  </Sticky>
-                </Rail>
+              <Segment stackeds>
+                <Sticky context={this.contextRef} pushing>
+                  <div className="Art">
+                    <h2>{`${this.props.title} (${this.props.artCreationStart} - ${this.props.artCreationEnd})`}</h2>
+                    <ArtCard 
+                      type={this.props.type}
+                      image={this.props.image}
+                      artTags={this.props.artTags}
+                      artMedium={this.props.artMedium}
+                      artDimensions={this.props.artDimensions}
+                      artCreatedAt={this.props.artCreatedAt || ""}
+                      artCreditLine={this.props.artCreditLine}
+                      artCountry={this.props.artCountry}
+                      department={this.props.department}
+                      artist={this.props.artist}
+                      artistBday={this.props.artistBday || ""}
+                      artistDeath={this.props.artistDeath || ""}
+                      artistNationality={this.props.artistNationality || ""}
+                    />
+                  </div>
+                </Sticky>
               </Segment>
             </Ref>
           </Grid.Column>
