@@ -9,8 +9,8 @@ const ArtHeader = ((props) => {
       {
         props.tags.map((tag, i) => {
           return(
-            <Label key={i} as='a' color={colorsB} image>
-              <img src="https://react.semantic-ui.com/images/avatar/small/veronika.jpg" />
+            <Label key={i} as='a' color={colorsB[i]} image>
+              <img src="https://react.semantic-ui.com/images/avatar/small/veronika.jpg" alt="tag icon" />
               <span id={i}>{tag}</span>
             </Label>
           )

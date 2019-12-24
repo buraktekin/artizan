@@ -29,14 +29,17 @@
   },
   "homepage": "https://github.com/buraktekin/artizan#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "path": "^0.12.7",
+    "puppeteer": "^2.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
-    "twitter": "^1.7.1"
+    "twitter": "^1.7.1",
+    "ws": "^7.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",

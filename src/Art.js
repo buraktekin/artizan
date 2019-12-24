@@ -1,7 +1,6 @@
 import React, { createRef } from "react"
-import ErrorBoundary from "./ErrorBoundary";
-import 'semantic-ui-css/semantic.min.css'
-import { Grid, Rail, Header, Ref, Sticky, Image, Segment } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css"
+import { Grid, Ref, Sticky, Image, Segment } from "semantic-ui-react"
 
 import ArtCard from "./ArtCard";
 
@@ -10,29 +9,6 @@ export default class Art extends React.Component {
 
   constructor(props) {
     super(props)
-    const {
-      image,
-      title,
-      department,
-      type,
-      artist,
-      artistNationality,
-      artistBday,
-      artistDeath,
-      artCreatedAt,
-      artCreationStart,
-      artCreationEnd,
-      artMedium,
-      artDimensions,
-      artCreditLine,
-      artCountry,
-      artRegion,
-      artFoundIn,
-      artType,
-      artlastUpdate,
-      artOriginURL,
-      artTags
-    } = props
   }
 
   render() {
@@ -51,6 +27,7 @@ export default class Art extends React.Component {
                   <div className="Art">
                     <h2>{`${this.props.title} (${this.props.artCreationStart} - ${this.props.artCreationEnd})`}</h2>
                     <ArtCard 
+                      url={this.props.artOriginURL}
                       type={this.props.type}
                       image={this.props.image}
                       artTags={this.props.artTags}

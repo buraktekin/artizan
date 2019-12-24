@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Divider, Header, Icon, Table } from "semantic-ui-react";
+import { Divider, Header, Icon, Table } from "semantic-ui-react";
 
 import ArtHeader from "./ArtHeader";
 
