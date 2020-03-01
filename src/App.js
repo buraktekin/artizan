@@ -33,6 +33,7 @@ function App() {
 
   const {
     primaryImage,
+    primaryImageSmall,
     department,
     objectName,
     title,
@@ -66,45 +67,45 @@ function App() {
     )
   } else {
     return(
-      <Grid columns={1} divided padded>
-        <Grid.Row stretched>
-          <Grid.Column>
-            <Container>
-              <Menu borderless>
-                <Menu.Item className="item__fluid" name="logo">
-                  <a href="/">
-                    {/* <Image src={Logo} size="tiny" alt="logo" /> */}
-                    <h2 className="brand">artizan</h2>
-                  </a>
-                </Menu.Item>
-              </Menu>
-              <Art
-                image={primaryImage}
-                title={title}
-                department={department}
-                type={objectName}
-                artist={artistDisplayName}
-                artistNationality={artistNationality}
-                artistBday={artistBeginDate}
-                artistDeath={artistEndDate}
-                artCreatedAt={objectDate}
-                artCreationStart={objectBeginDate}
-                artCreationEnd={objectEndDate}
-                artMedium={medium}
-                artDimensions={dimensions}
-                artCreditLine={creditLine}
-                artCountry={country}
-                artRegion={region}
-                artFoundIn={locale}
-                artType={classification}
-                artlastUpdate={metadataDate}
-                artOriginURL={objectURL}
-                artTags={tags}
-              />
-            </Container>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Container>
+        <Grid columns={1} divided padded>
+          <Grid.Row stretched>
+            <Grid.Column>
+                <Menu borderless>
+                  <Menu.Item className="item__fluid" name="logo">
+                    <a href="/">
+                      {/* <Image src={Logo} size="tiny" alt="logo" /> */}
+                      <h2 className="brand">artizan</h2>
+                    </a>
+                  </Menu.Item>
+                </Menu>
+                <Art
+                  image={primaryImageSmall || primaryImage}
+                  title={title}
+                  department={department}
+                  type={objectName}
+                  artist={artistDisplayName}
+                  artistNationality={artistNationality}
+                  artistBday={artistBeginDate}
+                  artistDeath={artistEndDate}
+                  artCreatedAt={objectDate}
+                  artCreationStart={objectBeginDate}
+                  artCreationEnd={objectEndDate}
+                  artMedium={medium}
+                  artDimensions={dimensions}
+                  artCreditLine={creditLine}
+                  artCountry={country}
+                  artRegion={region}
+                  artFoundIn={locale}
+                  artType={classification}
+                  artlastUpdate={metadataDate}
+                  artOriginURL={objectURL}
+                  artTags={tags}
+                />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     )
   }
 } 
