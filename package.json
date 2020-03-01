@@ -40,15 +40,15 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "twitter": "^1.7.1",
-    "ws": "^7.2.1"
-  },
-  "devDependencies": {
+    "ws": "^7.2.1",
     "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
     "babel-eslint": "^10.0.3",
-    "babel-preset-env": "^1.7.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "devDependencies": {
     "cross-env": "^6.0.3",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
