@@ -1,7 +1,7 @@
 import React from "react";
 import { Divider, Header, Icon, Table } from "semantic-ui-react";
 
-import ArtHeader from "./ArtHeader";
+import ArtTags from "./ArtTags";
 
 const ArtCard = (props) => {
   return(
@@ -56,7 +56,7 @@ const ArtCard = (props) => {
           <Table.Row>
             <Table.Cell>Tags</Table.Cell>
             <Table.Cell>
-              <ArtHeader image={props.image} tags={props.artTags || []} />
+              <ArtTags image={props.image} tags={props.artTags || []} />
             </Table.Cell>
           </Table.Row>
         </Table.Body>

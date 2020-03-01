@@ -3,7 +3,7 @@ import { Label } from "semantic-ui-react"
 
 const colorsB = ['blue', 'violet', 'purple', 'pink', 'brown', 'grey']
 
-const ArtHeader = ((props) => {
+const ArtTags = ((props) => {
   return(
     <div>
       {
@@ -20,4 +20,4 @@ const ArtHeader = ((props) => {
   )
 })
 
-export default ArtHeader
+export default ArtTags

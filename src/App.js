@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import Twitter from "twitter"
 import { 
   Container, 
   Grid, 
   Segment, 
   Loader,
   Dimmer,
-  Menu, 
-  Image, 
-  Header} from "semantic-ui-react";
+  Menu,
+  Image
+} from "semantic-ui-react";
 import Art from "./Art";
 import Logo from "../public/logo/artizan_logo.png"
 
@@ -34,7 +33,6 @@ function App() {
 
   const {
     primaryImage,
-    additionalImages,
     department,
     objectName,
     title,
@@ -76,7 +74,7 @@ function App() {
                 <Menu.Item className="item__fluid" name="logo">
                   <a href="/">
                     {/* <Image src={Logo} size="tiny" alt="logo" /> */}
-                    <h1 className="brand">artizan</h1>
+                    <h2 className="brand">artizan</h2>
                   </a>
                 </Menu.Item>
               </Menu>

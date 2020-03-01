@@ -22,7 +22,7 @@ export default class Art extends React.Component {
           </Grid.Column>
           <Grid.Column stretched>
             <Ref innerRef={this.contextRef}>
-              <Segment stackeds>
+              <Segment stackeds="true">
                 <Sticky context={this.contextRef} pushing>
                   <div className="Art">
                     <h2>{`${this.props.title} (${this.props.artCreationStart} - ${this.props.artCreationEnd})`}</h2>
