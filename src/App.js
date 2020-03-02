@@ -72,7 +72,7 @@ function App() {
       <Segment>
         <Dimmer active>
           <h1 className="brand">Artizan</h1>
-          <Loader size='massive'>Loading</Loader>
+          <Loader size='massive'>Loading next art piece...</Loader>
         </Dimmer>
       </Segment>
     )
