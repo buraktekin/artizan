@@ -29,7 +29,8 @@ function App() {
   })
   
   useEffect(() => {
-    fetch(API_URL + artId)
+    const artURL = API_URL + artId
+    fetch(artURL)
     .then(res => res.json())
     .then(res => {
       if(!res.artistDisplayName || !res.title || !res.tags || !res.primaryImage) {
