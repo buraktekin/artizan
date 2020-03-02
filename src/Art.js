@@ -1,6 +1,6 @@
 import React, { createRef } from "react"
 import "semantic-ui-css/semantic.min.css"
-import { Grid, Ref, Sticky, Image, Segment } from "semantic-ui-react"
+import { Grid, Ref, Sticky, Image, Segment, Responsive } from "semantic-ui-react"
 
 import ArtCard from "./ArtCard";
 
@@ -14,7 +14,7 @@ export default class Art extends React.Component {
   render() {
     return(
       <Grid divided="vertically">
-        <Grid.Row columns={2}>
+        <Grid.Row columns={this.props.device==="Mobile" ? 1 : 2}>
           <Grid.Column verticalAlign="middle" stretched>
             <a href={this.props.artOriginURL}>
               <Image src={this.props.image} wrapped centered/>

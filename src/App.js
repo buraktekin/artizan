@@ -13,9 +13,20 @@ import Logo from "../public/logo/artizan_logo.png"
 
 function App() {
   const API_URL = "https://collectionapi.metmuseum.org/public/collection/v1/objects/"
+  const [deviceType, setDeviceType] = useState("Desktop")
   const [collection, setCollection] = useState([])
   const [artId, setArtId] = useState(88993)
   const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    if(window.innerWidth > 992) {
+      setDeviceType("Desktop")
+    } else if (window.innerWidth > 768) {
+      setDeviceType("Tablet")
+    } else {
+      setDeviceType("Mobile")
+    }
+  })
   
   useEffect(() => {
     fetch(API_URL + artId)
@@ -80,6 +91,7 @@ function App() {
                   </Menu.Item>
                 </Menu>
                 <Art
+                  device={deviceType}
                   image={primaryImageSmall || primaryImage}
                   title={title}
                   department={department}
