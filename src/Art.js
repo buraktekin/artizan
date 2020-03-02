@@ -21,7 +21,7 @@ export default class Art extends React.Component {
             </a>
           </Grid.Column>
           <Grid.Column stretched>
-            <Ref innerRef={this.contextRef}>
+            <Ref innerRef={this.props.device==="Mobile" ? null : this.contextRef}>
               <Segment stackeds="true">
                 <Sticky context={this.contextRef} pushing>
                   <div className="Art">
