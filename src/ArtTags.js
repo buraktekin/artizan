@@ -8,7 +8,6 @@ const ArtTags = ((props) => {
     <div>
       {
         props.tags.map((tag, i) => {
-          console.log(tag)
           return(
             <Label key={i} as='a' color={colorsB[i]} image>
               <img src="https://react.semantic-ui.com/images/avatar/small/veronika.jpg" alt="tag icon" />
