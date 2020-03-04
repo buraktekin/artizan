@@ -4,6 +4,7 @@ import { Divider, Header, Icon, Table } from "semantic-ui-react";
 import ArtTags from "./ArtTags";
 
 const ArtCard = (props) => {
+  const collection = props.collection
   return(
     <React.Fragment>
       <Divider horizontal>
@@ -30,33 +31,37 @@ const ArtCard = (props) => {
       <Table definition>
         <Table.Body>
           <Table.Row>
-            <Table.Cell width={2}>Size</Table.Cell>
-            <Table.Cell>{props.artDimensions}</Table.Cell>
+            <Table.Cell width={2}>Period</Table.Cell>
+            <Table.Cell>{collection.objectDate || collection.period}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Type</Table.Cell>
-            <Table.Cell>{props.type}</Table.Cell>
+            <Table.Cell width={2}>Size</Table.Cell>
+            <Table.Cell>{collection.dimensions}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Department</Table.Cell>
+            <Table.Cell>{collection.department}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Materials</Table.Cell>
-            <Table.Cell>{props.artMedium}</Table.Cell>
+            <Table.Cell>{collection.medium}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Created/Found In</Table.Cell>
-            <Table.Cell>{props.artCountry}</Table.Cell>
+            <Table.Cell>Culture</Table.Cell>
+            <Table.Cell>{collection.culture}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Artist</Table.Cell>
-            <Table.Cell>{`${props.artist}, ${props.artistNationality}`}</Table.Cell>
+            <Table.Cell>{`${collection.constituents.role || "Artist"}`}</Table.Cell>
+            <Table.Cell>{`${collection.artistDisplayName}, ${collection.artistDisplayBio}`}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Credits</Table.Cell>
-            <Table.Cell>{props.artCreditLine}</Table.Cell>
+            <Table.Cell>{collection.creditLine}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Tags</Table.Cell>
             <Table.Cell>
-              <ArtTags image={props.image} tags={props.artTags || []} />
+              <ArtTags image={collection.image} tags={collection.tags || []} />
             </Table.Cell>
           </Table.Row>
         </Table.Body>

@@ -8,10 +8,11 @@ const ArtTags = ((props) => {
     <div>
       {
         props.tags.map((tag, i) => {
+          console.log(tag)
           return(
             <Label key={i} as='a' color={colorsB[i]} image>
               <img src="https://react.semantic-ui.com/images/avatar/small/veronika.jpg" alt="tag icon" />
-              <span id={i}>{tag}</span>
+              <span id={i}>{tag.term}</span>
             </Label>
           )
         })

@@ -12,36 +12,25 @@ export default class Art extends React.Component {
   }
 
   render() {
+    const collection = this.props.collection
+    console.log(collection)
     return(
       <Grid divided="vertically">
-        <Grid.Row columns={this.props.device==="Mobile" ? 1 : 2}>
+        <Grid.Row columns={collection.device==="Mobile" ? 1 : 2}>
           <Grid.Column verticalAlign="middle" stretched>
-            <a href={this.props.artOriginURL}>
-              <Image src={this.props.image} centered/>
+            <a href={collection.objectURL}>
+              <Image src={collection.primaryImageSmall || collection.primaryImage} centered/>
             </a>
           </Grid.Column>
           <Grid.Column stretched>
-            <Ref innerRef={this.props.device==="Mobile" ? null : this.contextRef}>
+            <Ref innerRef={collection.device==="Mobile" ? null : this.contextRef}>
               <Segment stackeds="true">
                 <Sticky context={this.contextRef} pushing>
                   <div className="Art">
-                    <h2>{`${this.props.title} (${this.props.artCreationStart} - ${this.props.artCreationEnd})`}</h2>
-                    <ArtCard 
-                      url={this.props.artOriginURL}
-                      type={this.props.type}
-                      image={this.props.image}
-                      artTags={this.props.artTags}
-                      artMedium={this.props.artMedium}
-                      artDimensions={this.props.artDimensions}
-                      artCreatedAt={this.props.artCreatedAt || ""}
-                      artCreditLine={this.props.artCreditLine}
-                      artCountry={this.props.artCountry}
-                      department={this.props.department}
-                      artist={this.props.artist}
-                      artistBday={this.props.artistBday || ""}
-                      artistDeath={this.props.artistDeath || ""}
-                      artistNationality={this.props.artistNationality || ""}
-                    />
+                    <a href={collection.objectURL}>
+                      <h2>{`${collection.title} (${collection.objectBeginDate} - ${collection.objectEndDate})`}</h2>
+                    </a>
+                    <ArtCard collection={collection}/>
                   </div>
                 </Sticky>
               </Segment>

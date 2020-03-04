@@ -5,8 +5,7 @@ import {
   Segment, 
   Loader,
   Dimmer,
-  Menu,
-  Image
+  Menu
 } from "semantic-ui-react";
 import Art from "./Art";
 import Logo from "../public/logo/artizan_logo.png"
@@ -43,31 +42,6 @@ function App() {
     .catch(err => console.error("Caught an error: ", err))
   }, [artId])
 
-  const {
-    primaryImage,
-    primaryImageSmall,
-    department,
-    objectName,
-    title,
-    artistDisplayName,
-    artistNationality,
-    artistBeginDate,
-    artistEndDate,
-    objectDate,
-    objectBeginDate,
-    objectEndDate,
-    medium,
-    dimensions,
-    creditLine,
-    country,
-    region,
-    locale,
-    classification,
-    metadataDate,
-    objectURL,
-    tags
-  } = collection
-
   if(isLoading){
     return(
       <Segment>
@@ -91,36 +65,13 @@ function App() {
                     </a>
                   </Menu.Item>
                 </Menu>
-                <Art
-                  device={deviceType}
-                  image={primaryImageSmall || primaryImage}
-                  title={title}
-                  department={department}
-                  type={objectName}
-                  artist={artistDisplayName}
-                  artistNationality={artistNationality}
-                  artistBday={artistBeginDate}
-                  artistDeath={artistEndDate}
-                  artCreatedAt={objectDate}
-                  artCreationStart={objectBeginDate}
-                  artCreationEnd={objectEndDate}
-                  artMedium={medium}
-                  artDimensions={dimensions}
-                  artCreditLine={creditLine}
-                  artCountry={country}
-                  artRegion={region}
-                  artFoundIn={locale}
-                  artType={classification}
-                  artlastUpdate={metadataDate}
-                  artOriginURL={objectURL}
-                  artTags={tags}
-                />
+                <Art collection={ collection }/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
     )
   }
-} 
+}
 
 export default App

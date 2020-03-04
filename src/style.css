@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Seaweed+Script&display=swap');
 
+a {
+  color: #000 !important;
+}
+
 h1.brand {
   font-family: 'Seaweed Script', cursive;
   font-size: 10rem;
