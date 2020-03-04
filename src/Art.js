@@ -17,7 +17,7 @@ export default class Art extends React.Component {
         <Grid.Row columns={this.props.device==="Mobile" ? 1 : 2}>
           <Grid.Column verticalAlign="middle" stretched>
             <a href={this.props.artOriginURL}>
-              <Image src={this.props.image}  centered/>
+              <Image src={this.props.image} centered/>
             </a>
           </Grid.Column>
           <Grid.Column stretched>
