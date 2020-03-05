@@ -35,6 +35,7 @@ function App() {
       if(!res.artistDisplayName || !res.title || !res.tags || !res.primaryImage) {
         setArtId(Math.floor(Math.random() * 500000) + 1)
       } else {
+        res.device = deviceType
         setCollection(res)
         setIsLoading(false)
       }
@@ -65,7 +66,7 @@ function App() {
                     </a>
                   </Menu.Item>
                 </Menu>
-                <Art collection={ collection }/>
+                <Art collection={ collection } />
             </Grid.Column>
           </Grid.Row>
         </Grid>

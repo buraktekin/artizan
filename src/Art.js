@@ -13,7 +13,6 @@ export default class Art extends React.Component {
 
   render() {
     const collection = this.props.collection
-    console.log(collection)
     return(
       <Grid divided="vertically">
         <Grid.Row columns={collection.device==="Mobile" ? 1 : 2}>
