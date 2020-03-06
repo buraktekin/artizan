@@ -1,8 +1,11 @@
 import React, { createRef } from "react"
+import _ from "lodash"
 import "semantic-ui-css/semantic.min.css"
 import { Grid, Ref, Sticky, Image, Segment } from "semantic-ui-react"
 
-import ArtCard from "./ArtCard";
+import ArtCard from "./ArtCard"
+import ArtHeader from "./ArtHeader"
+import ArtWork from "./ArtWork"
 
 export default class Art extends React.Component { 
   contextRef = createRef()
@@ -13,24 +16,27 @@ export default class Art extends React.Component {
 
   render() {
     const collection = this.props.collection
+    const header = _.pick(
+      this.props.collection, 
+      ["objectURL", "objectBeginDate", "objectEndDate", "title"]
+    )
+    const artwork = _.pick(
+      this.props.collection, 
+      ["objectURL", "primaryImage", "primaryImageSmall"]
+    )
+    
     return(
       <Grid divided="vertically">
         <Grid.Row columns={collection.device==="Mobile" ? 1 : 2}>
           <Grid.Column verticalAlign="middle" stretched>
-            <a href={collection.objectURL}>
-              <Image src={collection.primaryImageSmall || collection.primaryImage} centered/>
-            </a>
+            <ArtWork artwork={artwork} />
           </Grid.Column>
           <Grid.Column stretched>
             <Ref innerRef={collection.device==="Mobile" ? null : this.contextRef}>
               <Segment stackeds="true">
                 <Sticky context={this.contextRef} pushing>
-                  <div className="Art">
-                    <a href={collection.objectURL}>
-                      <h2>{`${collection.title} (${collection.objectBeginDate} - ${collection.objectEndDate})`}</h2>
-                    </a>
+                    <ArtHeader header={header} />
                     <ArtCard collection={collection}/>
-                  </div>
                 </Sticky>
               </Segment>
             </Ref>
