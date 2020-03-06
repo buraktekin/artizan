@@ -2,12 +2,14 @@
 
 #root {
   background: rgba(0, 0, 0, .75);
+  height: 100%;
 }
 
 body {
-  min-height: 100% !important;
-  background-image: url(https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) !important;
+  height: 100vh;
+  background-image: url(https://images.pexels.com/photos/1579708/pexels-photo-1579708.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) !important;
   background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 a {
@@ -60,7 +62,9 @@ table>tbody>tr>td:nth-child(2) {
 }
 
 .ui.container {
-  height: 100%;
+  height: 100vh;
+  width: 100%;
+  overflow-y: scroll;
 }
 
 .ui.image {
