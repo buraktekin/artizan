@@ -1,24 +1,82 @@
 @import url('https://fonts.googleapis.com/css?family=Seaweed+Script&display=swap');
 
+#root {
+  height: 100vh;
+  background: rgba(0, 0, 0, .75);
+}
+
+body {
+  background-image: url(https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
+  height: 100vh;
+}
+
 a {
-  color: #000 !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 h1.brand {
   font-family: 'Seaweed Script', cursive;
   font-size: 10rem;
   text-align: center;
-  color: #000;
+  color: rgb(255, 255, 255) !important;
 }
 
 h2.brand {
   font-family: 'Seaweed Script', cursive;
   font-size: 6rem;
   text-align: center;
-  color: #000;
+  color: rgb(255, 255, 255);
+}
+
+.artTitle,
+.artDate {
+  margin: 1rem;
+  padding: 0;
+}
+
+.artDate {
+  color: rgba(132, 82, 226, 0.993);
+  font-style: italic;
+}
+
+table>tbody>tr>td:first-child {
+  color: rgb(255, 255, 255) !important;
+}
+
+table>tbody>tr>td:nth-child(2) {
+  color: rgb(211, 211, 211) !important;
+}
+
+.ui.dimmer .ui.loader {
+  margin-top: -12rem !important;
+}
+
+.ui.dimmer .ui.loader:before {
+  border-color: rgba(41, 255, 137, 0.993) !important;
+}
+
+.ui.table {
+  background: transparent !important;
+}
+
+.ui.container {
+  height: 100%;
+}
+
+.ui.image {
+  max-width: auto;
+  max-height: 500px !important;
+}
+
+.ui.image.label {
+  margin: .3rem !important;
 }
 
 .ui.menu.borderless {
+  background: none;
   box-shadow: none;
   border: none;
   margin: 3rem 0;
@@ -27,13 +85,15 @@ h2.brand {
 .ui.menu .item,
 .ui.menu .item__fluid {
   flex: 1 0 auto !important;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: baseline;
 }
 
 .ui.segment {
+  padding: 0 !important;
   box-shadow: none !important;
   border: none !important;
+  background: rgba(132, 82, 226, 0.62) !important;
 }
 
 .ui.dimmer {

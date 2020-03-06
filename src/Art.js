@@ -27,15 +27,19 @@ export default class Art extends React.Component {
     
     return(
       <Grid divided="vertically">
+        <Grid.Row>
+          <Grid.Column>
+            <ArtHeader header={header} />
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row columns={collection.device==="Mobile" ? 1 : 2}>
           <Grid.Column verticalAlign="middle" stretched>
             <ArtWork artwork={artwork} />
           </Grid.Column>
-          <Grid.Column stretched>
+          <Grid.Column>
             <Ref innerRef={collection.device==="Mobile" ? null : this.contextRef}>
               <Segment stackeds="true">
                 <Sticky context={this.contextRef} pushing>
-                    <ArtHeader header={header} />
                     <ArtCard collection={collection}/>
                 </Sticky>
               </Segment>
