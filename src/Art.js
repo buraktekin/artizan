@@ -37,7 +37,7 @@ export default class Art extends React.Component {
             <ArtWork artwork={artwork} />
           </Grid.Column>
           <Grid.Column>
-            <Ref innerRef={collection.device==="Mobile" ? null : this.contextRef}>
+            <Ref innerRef={collection.device==="Mobile" ? {} : this.contextRef}>
               <Segment stackeds="true">
                 <Sticky context={this.contextRef} pushing>
                     <ArtCard collection={collection}/>

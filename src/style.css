@@ -2,14 +2,16 @@
 
 #root {
   background: rgba(0, 0, 0, .75);
-  height: 100%;
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   background-image: url(https://images.pexels.com/photos/1579708/pexels-photo-1579708.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #000000;
 }
 
 a {
@@ -61,12 +63,6 @@ table>tbody>tr>td:nth-child(2) {
   background: transparent !important;
 }
 
-.ui.container {
-  height: 100vh;
-  width: 100%;
-  overflow-y: scroll;
-}
-
 .ui.image {
   max-width: auto;
   max-height: 500px !important;
@@ -99,4 +95,14 @@ table>tbody>tr>td:nth-child(2) {
 
 .ui.dimmer {
   height: 100vh !important;
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    background-image: url(https://images.pexels.com/photos/3678799/pexels-photo-3678799.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) !important;
+  }
+
+  #root {
+    background: rgba(0, 0, 0, .75);
+  }
 }
