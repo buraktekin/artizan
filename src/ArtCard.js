@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider, Header, Icon, Table } from "semantic-ui-react";
+import { Icon, Table } from "semantic-ui-react";
 
 import ArtTags from "./ArtTags";
 
@@ -25,10 +25,6 @@ const ArtCard = (props) => {
             <Table.Cell>{collection.dimensions}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell className="col">Department</Table.Cell>
-            <Table.Cell>{collection.department}</Table.Cell>
-          </Table.Row>
-          <Table.Row>
             <Table.Cell className="col">Materials</Table.Cell>
             <Table.Cell>{collection.medium}</Table.Cell>
           </Table.Row>
@@ -39,10 +35,6 @@ const ArtCard = (props) => {
           <Table.Row>
             <Table.Cell className="col">{`${collection.constituents.role || "Artist"}`}</Table.Cell>
             <Table.Cell>{`${collection.artistDisplayName}, ${collection.artistDisplayBio}`}</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="col">Credits</Table.Cell>
-            <Table.Cell>{collection.creditLine}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Tags</Table.Cell>

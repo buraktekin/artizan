@@ -9,10 +9,14 @@ export default class ArtHeader extends Component {
   render() {
     const { header } = this.props
     return(
-      <a href={header.objectURL}>
-        <h3 className="artDate">{`(${header.objectBeginDate} - ${header.objectEndDate})`}</h3>
-        <h2 className="artTitle">{`${header.title}`}</h2>
-      </a>
+      <div className="titleWrapper">
+        <a href={header.objectURL}>
+          <h3 className="artTitle">
+            {`${header.title}`} 
+            <span className="artDate">{` (${header.objectBeginDate} - ${header.objectEndDate})`}</span>
+          </h3>
+        </a>
+      </div>
     )
   }
 }

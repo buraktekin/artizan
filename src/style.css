@@ -1,23 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Seaweed+Script&display=swap');
 
 #root {
-  background: rgba(0, 0, 0, .75);
+  width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
   overflow-y: scroll;
 }
 
 body {
   height: 100%;
-  background-image: url(https://images.pexels.com/photos/1579708/pexels-photo-1579708.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) !important;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: #000000;
 }
 
 a {
-  color: rgb(255, 255, 255) !important;
+  color: rgba(0, 0, 0, 0.993) !important;
 }
 
 h1.brand {
@@ -27,38 +23,41 @@ h1.brand {
   color: rgb(255, 255, 255) !important;
 }
 
-h2.brand {
+.brand {
   font-family: 'Seaweed Script', cursive;
-  font-size: 6rem;
+  font-size: 5rem;
   text-align: center;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
-.artTitle,
-.artDate {
-  margin: 1rem;
+.artDate, 
+.artTitle {
   padding: 0;
+  margin: 0;
+  font-size: .9rem;
 }
 
 .artDate {
-  color: rgba(132, 82, 226, 0.993);
+  color: rgba(155, 155, 155, 0.993);
   font-style: italic;
 }
 
+.titleWrapper {
+  text-align: center;
+}
+
 table>tbody>tr>td:first-child {
-  color: rgb(255, 255, 255) !important;
+  font-size: 1rem !important;
+  color: rgb(79, 7, 97) !important;
 }
 
 table>tbody>tr>td:nth-child(2) {
-  color: rgb(211, 211, 211) !important;
+  font-size: 1rem;
+  color: rgb(0, 0, 0) !important;
 }
 
-.ui.dimmer .ui.loader {
-  margin-top: -12rem !important;
-}
-
-.ui.dimmer .ui.loader:before {
-  border-color: rgba(41, 255, 137, 0.993) !important;
+.ui.grid>.row {
+  padding: .5rem !important;
 }
 
 .ui.table {
@@ -68,6 +67,7 @@ table>tbody>tr>td:nth-child(2) {
 .ui.image {
   max-width: auto;
   max-height: 500px !important;
+  box-shadow: 1px 2px 10px rgba(0,0,0,0.8);
 }
 
 .ui.image.label {
@@ -79,32 +79,64 @@ table>tbody>tr>td:nth-child(2) {
   box-shadow: none;
   border: none;
   margin: 3rem 0;
-}
-
-.ui.menu .item,
-.ui.menu .item__fluid {
-  flex: 1 0 auto !important;
-  justify-content: left;
-  align-items: baseline;
+  justify-content: center;
 }
 
 .ui.segment {
   padding: 0 !important;
   box-shadow: none !important;
   border: none !important;
-  background: rgba(132, 82, 226, 0.62) !important;
+  background: transparent !important;
 }
 
 .ui.dimmer {
+  width: 100%;
   height: 100vh !important;
+  position: fixed !important;
 }
 
-@media only screen and (max-width: 767px) {
-  body {
-    background-image: url(https://images.pexels.com/photos/3678799/pexels-photo-3678799.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) !important;
+.ui.dimmer .ui.loader {
+  margin-top: -12rem !important;
+}
+
+.ui.dimmer .ui.loader:before {
+  border-color: rgba(41, 255, 137, 0.993) !important;
+}
+
+@media only screen and (min-width: 992px) {
+  .infoWrapper {
+    position: fixed;
+    float: right;
+    right: 3rem;
+    bottom: 3rem;
+    max-width: 480px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .hero {
+    text-align: center;
+    background-image: url(https://images.pexels.com/photos/917494/pexels-photo-917494.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500) !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    padding: 1rem !important;
+    margin: 1rem !important;
   }
 
-  #root {
-    background: rgba(0, 0, 0, .75);
+  .hero > .item__fluid > a{
+    text-align: center !important;
+  }
+  
+  .ui.horizontally.divided.grid {
+    padding: 2rem !important;
+  }
+
+  .infoWrapper {
+    position: relative;
+    top: 1rem;
+    right: 0;
+    bottom: 0;
+    width: 100%;
   }
 }

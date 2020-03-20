@@ -6,15 +6,16 @@ import {
   Loader,
   Dimmer,
   Menu
-} from "semantic-ui-react";
-import Art from "./Art";
-import Logo from "../public/logo/artizan_logo.png"
+} from "semantic-ui-react"
+import _ from "lodash"
+import Art from "./Art"
+// import Logo from "../public/logo/artizan_logo.png"
 
 function App() {
   const API_URL = "https://collectionapi.metmuseum.org/public/collection/v1/objects/"
   const [deviceType, setDeviceType] = useState("Desktop")
   const [collection, setCollection] = useState([])
-  const [artId, setArtId] = useState(88993)
+  const [artId, setArtId] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
     } else {
       setDeviceType("Mobile")
     }
-  })
+  }, [])
   
   useEffect(() => {
     const artURL = API_URL + artId
@@ -41,7 +42,7 @@ function App() {
       }
     })
     .catch(err => console.error("Caught an error: ", err))
-  }, [artId])
+  }, [artId, deviceType])
 
   if(isLoading){
     return(
@@ -54,23 +55,24 @@ function App() {
     )
   } else {
     return(
-      <Container>
-        <Grid columns={1} divided padded>
-          <Grid.Row stretched>
-            <Grid.Column>
-                <Menu borderless>
-                  <Menu.Item className="item__fluid" name="logo">
-                    <a href="/">
-                      {/* <Image src={Logo} size="tiny" alt="logo" /> */}
-                      <h2 className="brand">artizan</h2>
-                    </a>
-                  </Menu.Item>
-                </Menu>
-                <Art collection={ collection } />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      <Grid columns={1} divided padded>
+        <Grid.Row>
+          <Grid.Column>
+            <div className="hero">
+              <Menu borderless>
+                <Menu.Item name="logo">
+                  <a href="/">
+                    <h3 className="brand">artizan</h3>
+                  </a>
+                </Menu.Item>
+              </Menu>
+            </div>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row stretched>
+          <Art collection={ collection } />
+        </Grid.Row>
+      </Grid>
     )
   }
 }
