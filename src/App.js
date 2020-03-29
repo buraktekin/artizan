@@ -56,7 +56,7 @@ function App() {
   } else {
     return(
       <Grid columns={1} divided padded>
-        <Grid.Row>
+        <Grid.Row className="head">
           <Grid.Column>
             <div className="hero">
               <Menu borderless>
@@ -69,7 +69,7 @@ function App() {
             </div>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row stretched>
+        <Grid.Row className="body" stretched>
           <Art collection={ collection } />
         </Grid.Row>
       </Grid>

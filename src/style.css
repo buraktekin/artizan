@@ -2,14 +2,22 @@
 
 #root {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 0;
   margin: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+}
+
+#root::-webkit-scrollbar {
+  display: none;
 }
 
 body {
-  height: 100%;
+  height: 100vh;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: top;
 }
 
 a {
@@ -21,6 +29,16 @@ h1.brand {
   font-size: 10rem;
   text-align: center;
   color: rgb(255, 255, 255) !important;
+}
+
+table>tbody>tr>td:first-child {
+  font-size: .8rem !important;
+  color: rgb(79, 7, 97) !important;
+}
+
+table>tbody>tr>td:nth-child(2) {
+  font-size: .8rem;
+  color: rgb(0, 0, 0) !important;
 }
 
 .brand {
@@ -46,18 +64,33 @@ h1.brand {
   text-align: center;
 }
 
-table>tbody>tr>td:first-child {
-  font-size: 1rem !important;
-  color: rgb(79, 7, 97) !important;
-}
-
-table>tbody>tr>td:nth-child(2) {
-  font-size: 1rem;
-  color: rgb(0, 0, 0) !important;
+.ui.grid {
+	height: 100%;
 }
 
 .ui.grid>.row {
-  padding: .5rem !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.ui.grid>.row>.column {
+	padding: 0 !important;
+	margin: 0 !important;
+  top: -10px;
+}
+
+.ui.grid>.row.head {
+  height: 20vh !important;
+}
+
+.ui.grid>.row.body {
+  height: 80vh !important;
+	width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: rgba(255, 255, 255, 1) !important;
 }
 
 .ui.table {
@@ -65,8 +98,9 @@ table>tbody>tr>td:nth-child(2) {
 }
 
 .ui.image {
+	margin-top: 1rem !important;
   max-width: auto;
-  max-height: 500px !important;
+  max-height: 400px !important;
   box-shadow: 1px 2px 10px rgba(0,0,0,0.8);
 }
 
@@ -105,31 +139,45 @@ table>tbody>tr>td:nth-child(2) {
 
 @media only screen and (min-width: 992px) {
   .infoWrapper {
-    position: fixed;
+    position: relative;
     float: right;
-    right: 3rem;
-    bottom: 3rem;
+    min-width: 200px;
     max-width: 480px;
+    margin-top: 2rem;
+  }
+  h3.brand {
+  	font-size: 8rem;
   }
 }
 
 @media only screen and (max-width: 991px) {
+	h3.brand {
+  	color: #fff;
+  }
+
+	.ui.container {
+		padding: 2rem !important;
+	}
+
+	.ui.menu .item {
+		margin: 1rem 0;
+	}
+
+	.ui.horizontally.divided.grid {
+    padding: 2rem !important;
+  }
+
   .hero {
+  	background-size: cover;
+  	background-position: 800px 600px !important;
+  	background-image: url(https://images.instapainting.com/565ffb0490f1f8b8248b459b.jpg) !important;
     text-align: center;
-    background-image: url(https://images.pexels.com/photos/917494/pexels-photo-917494.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500) !important;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-    padding: 1rem !important;
-    margin: 1rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   .hero > .item__fluid > a{
     text-align: center !important;
-  }
-  
-  .ui.horizontally.divided.grid {
-    padding: 2rem !important;
   }
 
   .infoWrapper {
