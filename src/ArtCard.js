@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useRef, useEffect} from "react";
 import { Icon, Table } from "semantic-ui-react";
 
 import ArtTags from "./ArtTags";
 
 const ArtCard = (props) => {
-  const collection = props.collection
+  const { collection } = props
   return(
     <React.Fragment>
       {/* <Divider horizontal>
@@ -33,7 +33,7 @@ const ArtCard = (props) => {
             <Table.Cell>{collection.culture}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell className="col">{`${collection.constituents.role || "Artist"}`}</Table.Cell>
+            <Table.Cell className="col">Artist</Table.Cell>
             <Table.Cell>{`${collection.artistDisplayName}, ${collection.artistDisplayBio}`}</Table.Cell>
           </Table.Row>
           <Table.Row>
