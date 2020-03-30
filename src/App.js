@@ -56,20 +56,19 @@ function App() {
       setTimer(timer + 1)
     }, 100)
 
+    // After 10secs get another art piece
+    if(timer === 100) {
+      // reset timer
+      setTimer(0)
+      // generate new id to fetch
+      const newId = Math.floor(Math.random() * 500000) + 1
+      setArtId(newId)
+      // show loading window
+      setIsLoading(true)
+    }
+
     return () => { clearInterval(interval) } // stop ticking 
   }, [timer])
-
-  
-  // After 10secs get another art piece
-  if(timer === 100) {
-    // reset timer
-    setTimer(0)
-    // generate new id to fetch
-    const newId = Math.floor(Math.random() * 500000) + 1
-    setArtId(newId)
-    // show loading window
-    setIsLoading(true)
-  }
 
   if(isLoading){
     return(
