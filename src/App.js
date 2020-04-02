@@ -4,11 +4,11 @@ import {
   Segment, 
   Loader,
   Dimmer,
-  Menu,
   Progress,
 } from "semantic-ui-react"
 import _ from "lodash"
 import Art from "./Art"
+import ArtMenu from "./Menu"
 // import Logo from "../public/logo/artizan_logo.png"
 
 function App() {
@@ -58,52 +58,44 @@ function App() {
 
     // After 10secs get another art piece
     if(timer === 100) {
-      // reset timer
-      setTimer(0)
       // generate new id to fetch
       const newId = Math.floor(Math.random() * 500000) + 1
       setArtId(newId)
-      // show loading window
-      setIsLoading(true)
+      setIsLoading(true) // show loading window
+      setTimer(0) // reset timer
     }
 
     return () => { clearInterval(interval) } // stop ticking 
   }, [timer])
 
-  if(isLoading){
-    return(
+
+  // View 
+  return(
+    isLoading ? (
       <Segment>
         <Dimmer active>
           <h1 className="brand">Artizan</h1>
           <Loader size='massive'>Loading next art piece...</Loader>
         </Dimmer>
       </Segment>
+    ) : (
+      <React.StrictMode>
+        <Grid columns={1} divided padded>
+          <Grid.Row className="head">
+            <Grid.Column>
+              <ArtMenu />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row className="body" stretched>
+            <Art collection={ collection } />
+          </Grid.Row>
+          <div className="counter">
+            <Progress percent={timer} size='tiny' color='violet' />
+          </div>
+        </Grid>
+      </React.StrictMode>
     )
-  } else {
-    return(
-      <Grid columns={1} divided padded>
-        <Grid.Row className="head">
-          <Grid.Column>
-            <div className="hero">
-              <Menu borderless>
-                <Menu.Item name="logo">
-                  <a href="/">
-                    <h3 className="brand">artizan</h3>
-                  </a>
-                </Menu.Item>
-              </Menu>
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row className="body" stretched>
-          <Art collection={ collection } />
-        </Grid.Row>
-        <div className="counter">
-          <Progress percent={timer} size='tiny' color='violet' />
-        </div>
-      </Grid>
-    )
-  }
+  )
 }
 
 export default App
