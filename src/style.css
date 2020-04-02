@@ -159,18 +159,18 @@ table>tbody>tr>td:nth-child(2) {
   .infoWrapper {
     position: relative;
     float: right;
-    min-width: 200px;
+    min-width: 360px;
     max-width: 480px;
     margin-top: 2rem;
   }
   h3.brand {
-  	font-size: 8rem;
+    font-size: 8rem;
   }
 }
 
 @media only screen and (max-width: 991px) {
 	h3.brand {
-  	color: #fff;
+    color: #fff;
   }
 
 	.ui.container {
@@ -186,9 +186,9 @@ table>tbody>tr>td:nth-child(2) {
   }
 
   .hero {
-  	background-size: cover;
-  	background-position: 800px 600px !important;
-  	background-image: url(https://images.instapainting.com/565ffb0490f1f8b8248b459b.jpg) !important;
+    background-size: cover;
+    background-position: 800px 600px !important;
+    background-image: url(https://images.instapainting.com/565ffb0490f1f8b8248b459b.jpg) !important;
     text-align: center;
     padding: 0 !important;
     margin: 0 !important;
