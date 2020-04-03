@@ -5,7 +5,8 @@ import {
   Dimmer,
   Progress,
 } from 'semantic-ui-react'
-import "semantic-ui-css/semantic.min.css"
+import 'semantic-ui-css/semantic.min.css'
+import './style.css'
 import Firebase from 'firebase';
 
 import Art from './Art'
