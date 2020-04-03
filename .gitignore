@@ -110,3 +110,4 @@ dist
 # extra
 conf.txt
 src/Config.js
+build/
