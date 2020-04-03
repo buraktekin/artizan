@@ -8,9 +8,13 @@ export default class ArtWork extends React.Component {
 
   render() {
     const artwork = this.props.artwork
-    return(
+    return (
       <a href={artwork.objectURL}>
-        <Image src={artwork.primaryImageSmall || artwork.primaryImage} centered/>
+        <Image
+          src={artwork.primaryImageSmall || artwork.primaryImage}
+          className="artwork"
+          centered
+        />
       </a>
     )
   }

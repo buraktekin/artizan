@@ -26,7 +26,7 @@ const Art = (props) => {
             <ArtWork artwork={artwork} />
             <ArtButtonGroup />
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row className='row--info'>
             <Segment className="infoWrapper" stackeds="true">
               <ArtHeader header={header} />
               <ArtCard collection={collection} />

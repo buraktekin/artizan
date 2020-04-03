@@ -163,7 +163,7 @@ function App() {
                 status={isTicking}
               />
             </Grid.Row>
-            <Grid.Row>
+            <Grid.Row className='head' stretched>
               <ArtMenu />
             </Grid.Row>
             <Grid.Row className='body' stretched>
