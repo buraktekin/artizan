@@ -71,7 +71,7 @@ function App() {
         setProgress(progress + 3)
       }
     }, 1000)
-    // After 10secs get another art piece
+    // After 30secs get another art piece
     if (progress > 100) {
       setArtId(newId)
       setIsLoading(true) // show loading window
@@ -112,14 +112,14 @@ function App() {
         })
         .then((res) => {
           // If prior fields are empty, rerun fetch process
-          if (!(res.tags && res.title && res.primaryImage)) {
+          if (!(res && res.tags && res.title && res.primaryImage)) {
             throw new Error(`One or more prior information are missing for ID: ${artId}`)
           } else {
             res.device = deviceType
             setCollection(res) // pass fetched data to state
             setProgress(0) // reset progress
-            setIsLoading(false)
           }
+          setIsLoading(false)
         })
         .catch((err) => {
           console.error(`Caught an error: ${err}, Trying again...`)
