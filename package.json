@@ -6,7 +6,8 @@
   "scripts": {
     "clear-build-cache": "rm -rf .cache/ dist/",
     "start": "parcel index.html",
-    "test": "npm run test"
+    "test": "npm run test",
+    "build": "parcel build ./src/index.js --out-dir build/output"
   },
   "repository": {
     "type": "git",
