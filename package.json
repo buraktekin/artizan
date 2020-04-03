@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "clear-build-cache": "rm -rf .cache/ build/",
-    "start": "parcel ./public/index.html",
+    "start": "parcel ./index.html",
     "test": "npm run test",
     "build": "react-scripts build",
     "predeploy": "npm run build",
