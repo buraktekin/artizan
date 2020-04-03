@@ -1,5 +1,5 @@
-import React, {useRef, useEffect} from "react";
-import { Icon, Table } from "semantic-ui-react";
+import React from "react";
+import { Table } from "semantic-ui-react";
 
 import ArtTags from "./ArtTags";
 
@@ -7,15 +7,12 @@ const ArtCard = (props) => {
   const { collection } = props
   return(
     <React.Fragment>
-      {/* <Divider horizontal>
-        <Header as='h4'>
-          <Icon name='sliders horizontal' />
-          Specifications
-        </Header>
-      </Divider> */}
-
       <Table definition>
         <Table.Body>
+          <Table.Row>
+            <Table.Cell className="col">Artist</Table.Cell>
+            <Table.Cell>{`${collection.artistDisplayName} ${collection.artistDisplayBio}`}</Table.Cell>
+          </Table.Row>
           <Table.Row>
             <Table.Cell width={2} className="col">Period</Table.Cell>
             <Table.Cell>{collection.objectDate || collection.period}</Table.Cell>
@@ -31,10 +28,6 @@ const ArtCard = (props) => {
           <Table.Row>
             <Table.Cell className="col">Culture</Table.Cell>
             <Table.Cell>{collection.culture}</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell className="col">Artist</Table.Cell>
-            <Table.Cell>{`${collection.artistDisplayName}, ${collection.artistDisplayBio}`}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Tags</Table.Cell>

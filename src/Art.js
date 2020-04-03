@@ -1,8 +1,9 @@
-import React, { createRef } from "react"
+import React from "react"
 import _ from "lodash"
 import "semantic-ui-css/semantic.min.css"
 import { Grid, Segment, Container } from "semantic-ui-react"
 
+import ArtButtonGroup from './ArtButtonGroup'
 import ArtHeader from "./ArtHeader"
 import ArtCard from "./ArtCard"
 import ArtWork from "./ArtWork"
@@ -19,23 +20,22 @@ const Art = (props) => {
   )
   
   return(
-    <Container>
-      <Grid>
-        <Grid.Row>
-          <Grid.Column verticalAlign="middle" width={16} stretched>
+    <>
+      <Container text>
+        <Grid columns={2} divided centered stackable stretched>
+          <Grid.Row>
             <ArtWork artwork={artwork} />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <div className="infoWrapper">
-            <Segment stackeds="true">
+            <ArtButtonGroup />
+          </Grid.Row>
+          <Grid.Row>
+            <Segment className="infoWrapper" stackeds="true">
               <ArtHeader header={header}/>
               <ArtCard collection={collection}/>
             </Segment>
-          </div>
-        </Grid.Row>
-      </Grid>
-    </Container>
+          </Grid.Row>
+        </Grid>
+      </Container>
+    </>
   )
 }
 
