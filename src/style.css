@@ -64,13 +64,21 @@ table>tbody>tr>td:nth-child(2) {
   text-align: center;
 }
 
+.ui.button {
+  margin: auto .1rem !important;
+}
+
+.ui.container {
+  position: relative;
+}
+
 .ui.grid {
 	height: 100%;
 }
 
 .ui.grid>.row {
   align-items: center !important;
-  justify-content: flex-end !important;
+  justify-content: center !important;
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -78,37 +86,68 @@ table>tbody>tr>td:nth-child(2) {
 .ui.grid>.row>.column {
 	padding: 0 !important;
 	margin: 0 !important;
-  top: -10px;
 }
 
 .ui.grid>.row.head {
+  justify-content: center !important;
+  align-items: flex-end !important;
   height: 20vh !important;
+  z-index: 1;
 }
 
 .ui.grid>.row.body {
-  height: 80vh !important;
-	width: 100% !important;
+  height: 80vh;
+	width: 100%;
   padding: 0 !important;
   margin: 0 !important;
-  background-color: rgba(255, 255, 255, 1) !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
 }
 
-.ui.grid>.counter {
+.ui.grid>.row.timer-bar {
+  height: 2vh;
+}
+
+.ui.grid>.row.timer-bar>.ui.progress {
   position: fixed;
   top: 0;
   left: -1px;
-  width: -1px;
+  right: -1px;
   margin: 0 !important;
   padding: 0 !important;
   align-items: flex-end !important;
   justify-content: flex-start !important;
   width: 100% !important;
-  height: 2vh !important;
+  z-index: 10;
 }
 
-.ui.progress {
+.ui.timer-controller {
+  width: 100%;
+  flex-direction: row !important;
+  justify-content: space-evenly;
+  position: absolute;
+  top: .5rem;
+  z-index: 2;
+}
+
+.ui.timer-controller > .ui.button {
   margin: 0 !important;
-  padding: 0 !important;
+}
+
+.ui.timer-controller > .ui.button:hover,
+.ui.timer-controller > .ui.button:focus,
+.ui.timer-controller > .ui.button:active {
+  color: rgb(79, 7, 97) !important;
+  transition: 0.5s;
+}
+
+.ui.page-controls {
+  position: absolute;
+  display: flex;
+  top: 1rem;
+  right: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .ui.table {
@@ -116,9 +155,8 @@ table>tbody>tr>td:nth-child(2) {
 }
 
 .ui.image {
+  max-height: 450px;
 	margin-top: 1rem !important;
-  max-width: auto;
-  max-height: 400px !important;
   box-shadow: 1px 2px 10px rgba(0,0,0,0.8);
 }
 
@@ -155,24 +193,20 @@ table>tbody>tr>td:nth-child(2) {
   border-color: rgba(41, 255, 137, 0.993) !important;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
   .infoWrapper {
-    position: relative;
-    float: right;
+    justify-content: flex-end !important;
+    align-items: flex-end !important;
     min-width: 360px;
     max-width: 480px;
-    margin-top: 2rem;
+    margin-top: 1.5rem !important;
   }
   h3.brand {
-    font-size: 8rem;
+    font-size: 5rem;
   }
 }
 
-@media only screen and (max-width: 991px) {
-	h3.brand {
-    color: #fff;
-  }
-
+@media only screen and (max-width: 768px) {
 	.ui.container {
 		padding: 2rem !important;
 	}
@@ -185,16 +219,7 @@ table>tbody>tr>td:nth-child(2) {
     padding: 2rem !important;
   }
 
-  .hero {
-    background-size: cover;
-    background-position: 800px 600px !important;
-    background-image: url(https://images.instapainting.com/565ffb0490f1f8b8248b459b.jpg) !important;
-    text-align: center;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  .hero > .item__fluid > a{
+  .item__fluid > a{
     text-align: center !important;
   }
 
@@ -203,6 +228,7 @@ table>tbody>tr>td:nth-child(2) {
     top: 1rem;
     right: 0;
     bottom: 0;
+    left: 0;
     width: 100%;
   }
 }
