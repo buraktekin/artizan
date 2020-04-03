@@ -5,18 +5,13 @@ import {
   Dimmer,
   Progress,
 } from 'semantic-ui-react'
+import "semantic-ui-css/semantic.min.css"
 import Firebase from 'firebase';
 
-import config from './Config';
-import _ from 'lodash'
 import Art from './Art'
 import ArtMenu from './Menu'
 import ArtController from './ArtController'
 // import Logo from '../public/logo/artizan_logo.png'
-
-function newId() {
-  return Math.floor(Math.random() * 500000) + 1 // generate new id to fetch
-}
 
 function App() {
   /*
@@ -26,7 +21,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [isTicking, setIsTicking] = useState(true)
   const [progress, setProgress] = useState(0)
-  const [deviceType, setDeviceType] = useState('Desktop')
   const [collection, setCollection] = useState([])
   const [artId, setArtId] = useState()
 
@@ -39,6 +33,29 @@ function App() {
     setIsLoading(true)
     setIsTicking(true)
     setArtId(newId)
+  }
+
+  /*
+  * Helpers
+  */
+  function newId() {
+    /*
+    * Generate new ID to fetch and art piece
+    */
+    return Math.floor(Math.random() * 500000) + 1 // generate new id to fetch
+  }
+
+  function getDeviceType() {
+    /* 
+    * Roughly determine the device type visiting our app
+    */
+    if (window.innerWidth > 991) {
+      return 'Desktop'
+    } else if (window.innerWidth > 767) {
+      return 'Tablet'
+    } else {
+      return 'Mobile'
+    }
   }
 
   /* 
@@ -79,26 +96,15 @@ function App() {
     return () => clearInterval(interval) // stop ticking 
   }, [isTicking, progress])
 
-  /* 
-  * Get device type information
-  * Roughly determine the device type visiting our app
-  */
-  useEffect(() => {
-    if (window.innerWidth > 991) {
-      setDeviceType('Desktop')
-    } else if (window.innerWidth > 767) {
-      setDeviceType('Tablet')
-    } else {
-      setDeviceType('Mobile')
-    }
-  }, [])
-
   /*
   * Fetch data
   */
   useEffect(() => {
     const artURL = API_URL + artId
     async function getData() {
+      /*
+      * fetch data asyncronously
+      */
       await fetch(
         artURL,
         { timeout: 5000 }
@@ -115,7 +121,7 @@ function App() {
           if (!(res && res.tags && res.title && res.primaryImage)) {
             throw new Error(`One or more prior information are missing for ID: ${artId}`)
           } else {
-            res.device = deviceType
+            res.device = getDeviceType()
             setCollection(res) // pass fetched data to state
             setProgress(0) // reset progress
           }

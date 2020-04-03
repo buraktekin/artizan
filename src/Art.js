@@ -1,6 +1,5 @@
 import React from "react"
 import _ from "lodash"
-import "semantic-ui-css/semantic.min.css"
 import { Grid, Segment, Container } from "semantic-ui-react"
 
 import ArtButtonGroup from './ArtButtonGroup'
@@ -8,18 +7,18 @@ import ArtHeader from "./ArtHeader"
 import ArtCard from "./ArtCard"
 import ArtWork from "./ArtWork"
 
-const Art = (props) => { 
+const Art = (props) => {
   const { collection } = props
   const artwork = _.pick(
     collection,
     ["objectURL", "primaryImage", "primaryImageSmall"]
   )
   const header = _.pick(
-    collection, 
+    collection,
     ["objectURL", "objectBeginDate", "objectEndDate", "title"]
   )
-  
-  return(
+
+  return (
     <>
       <Container text>
         <Grid columns={2} divided centered stackable stretched>
@@ -29,8 +28,8 @@ const Art = (props) => {
           </Grid.Row>
           <Grid.Row>
             <Segment className="infoWrapper" stackeds="true">
-              <ArtHeader header={header}/>
-              <ArtCard collection={collection}/>
+              <ArtHeader header={header} />
+              <ArtCard collection={collection} />
             </Segment>
           </Grid.Row>
         </Grid>
