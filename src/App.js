@@ -125,8 +125,8 @@ function App() {
             res.device = getDeviceType()
             setCollection(res) // pass fetched data to state
             setProgress(0) // reset progress
+            setIsLoading(false)
           }
-          setIsLoading(false)
         })
         .catch((err) => {
           console.error(`Caught an error: ${err}, Trying again...`)
