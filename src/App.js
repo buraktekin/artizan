@@ -1,100 +1,170 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { 
-  Grid, 
-  Segment, 
+import React, { useState, useEffect } from 'react'
+import {
+  Grid,
   Loader,
   Dimmer,
   Progress,
-} from "semantic-ui-react"
-import _ from "lodash"
-import Art from "./Art"
-import ArtMenu from "./Menu"
-// import Logo from "../public/logo/artizan_logo.png"
+} from 'semantic-ui-react'
+import Firebase from 'firebase';
+
+import config from './Config';
+import _ from 'lodash'
+import Art from './Art'
+import ArtMenu from './Menu'
+import ArtController from './ArtController'
+// import Logo from '../public/logo/artizan_logo.png'
+
+function newId() {
+  return Math.floor(Math.random() * 500000) + 1 // generate new id to fetch
+}
 
 function App() {
-  const API_URL = "https://collectionapi.metmuseum.org/public/collection/v1/objects/"
-  const [deviceType, setDeviceType] = useState("Desktop")
+  /*
+  * states
+  */
+  const [subscription, setSubscription] = useState({ user: '', favorites: [] })
   const [isLoading, setIsLoading] = useState(true)
+  const [isTicking, setIsTicking] = useState(true)
+  const [progress, setProgress] = useState(0)
+  const [deviceType, setDeviceType] = useState('Desktop')
   const [collection, setCollection] = useState([])
-  const [artId, setArtId] = useState(3288)
-  const [timer, setTimer] = useState(0)
+  const [artId, setArtId] = useState()
 
-  useEffect(() => {
-    if(window.innerWidth > 992) {
-      setDeviceType("Desktop")
-    } else if (window.innerWidth > 768) {
-      setDeviceType("Tablet")
-    } else {
-      setDeviceType("Mobile")
-    }
-  }, [])
-  
+  /* 
+  * Handlers & Constants
+  */
+  const API_URL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
+  const tickHandler = () => setIsTicking(!isTicking)
+  const skipHandler = () => {
+    setIsLoading(true)
+    setIsTicking(true)
+    setArtId(newId)
+  }
 
-  // fetch data
-  useEffect(() => {
-    const artURL = API_URL + artId
-    fetch(artURL, {timeout: 5000}) // set response time to 5 sec.
-      .then(res => res.json())
-      .then(res => {
-        // If prior fields are empty, rerun fetch process
-        if(!res.tags || !res.title || !res.primaryImage) {
-          setArtId(Math.floor(Math.random() * 500000) + 1)
-        } else {
-          res.device = deviceType
-          setCollection(res)
-          setIsLoading(false)
-          setTimer(0)
-        }
-      })
-      .catch(err => console.error("Caught an error: ", err))
-  }, [artId, deviceType])
+  /* 
+  * Subscription Control
+  */
+  const subscriptionHandler = (email, favorite) => {
+    setSubscription({ user: email, favorites: [...subscription.favorites, favorite] })
+    console.log("USER: ", subscription)
+  }
+  const writeUserData = () => {
+    Firebase.database().ref('/').set(subscription);
+    console.log('DATA SAVED');
+  }
+  const getUserData = () => {
+    let ref = Firebase.database().ref('/');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      setSubscription(state);
+    });
+    console.log('DATA RETRIEVED');
+  }
 
-
-  // Set interval to tick and change progress bar value per sec.
+  /* 
+  * Progress Bar
+  * Set interval to tick and change progress bar value per sec.
+  */
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimer(timer + 1)
-    }, 100)
-
+      if (isTicking) {
+        setProgress(progress + 3)
+      }
+    }, 1000)
     // After 10secs get another art piece
-    if(timer === 100) {
-      // generate new id to fetch
-      const newId = Math.floor(Math.random() * 500000) + 1
+    if (progress > 100) {
       setArtId(newId)
       setIsLoading(true) // show loading window
-      setTimer(0) // reset timer
     }
+    return () => clearInterval(interval) // stop ticking 
+  }, [isTicking, progress])
 
-    return () => { clearInterval(interval) } // stop ticking 
-  }, [timer])
+  /* 
+  * Get device type information
+  * Roughly determine the device type visiting our app
+  */
+  useEffect(() => {
+    if (window.innerWidth > 991) {
+      setDeviceType('Desktop')
+    } else if (window.innerWidth > 767) {
+      setDeviceType('Tablet')
+    } else {
+      setDeviceType('Mobile')
+    }
+  }, [])
 
+  /*
+  * Fetch data
+  */
+  useEffect(() => {
+    const artURL = API_URL + artId
+    async function getData() {
+      await fetch(
+        artURL,
+        { timeout: 5000 }
+      )
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Not 200 response")
+          } else {
+            return res.json()
+          }
+        })
+        .then((res) => {
+          // If prior fields are empty, rerun fetch process
+          if (!(res.tags && res.title && res.primaryImage)) {
+            throw new Error(`One or more prior information are missing for ID: ${artId}`)
+          } else {
+            res.device = deviceType
+            setCollection(res) // pass fetched data to state
+            setProgress(0) // reset progress
+            setIsLoading(false)
+          }
+        })
+        .catch((err) => {
+          console.error(`Caught an error: ${err}, Trying again...`)
+          setArtId(newId)
+        })
+    }
+    getData()
+  }, [artId])
 
-  // View 
-  return(
+  /*
+  * Render View
+  */
+  return (
     isLoading ? (
-      <Segment>
+      <>
         <Dimmer active>
-          <h1 className="brand">Artizan</h1>
-          <Loader size='massive'>Loading next art piece...</Loader>
+          <h1 className='brand'>Artizan</h1>
+          <Loader size='massive' color='violet'>Loading next art piece...</Loader>
         </Dimmer>
-      </Segment>
+      </>
     ) : (
-      <React.StrictMode>
-        <Grid columns={1} divided padded>
-          <Grid.Row className="head">
-            <Grid.Column>
+        <>
+          <Grid columns={1} divided padded>
+            <Grid.Row className='timer-bar'>
+              <Progress percent={progress} size='tiny' color='violet' />
+              <ArtController
+                handlers={{
+                  skipHandler,
+                  tickHandler,
+                  subscriptionHandler,
+                  writeUserData,
+                  getUserData
+                }}
+                status={isTicking}
+              />
+            </Grid.Row>
+            <Grid.Row>
               <ArtMenu />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row className="body" stretched>
-            <Art collection={ collection } />
-          </Grid.Row>
-          <div className="counter">
-            <Progress percent={timer} size='tiny' color='violet' />
-          </div>
-        </Grid>
-      </React.StrictMode>
-    )
+            </Grid.Row>
+            <Grid.Row className='body' stretched>
+              <Art collection={collection} />
+            </Grid.Row>
+          </Grid>
+        </>
+      )
   )
 }
 
