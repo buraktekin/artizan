@@ -11,7 +11,10 @@ export default class ArtWork extends React.Component {
     return (
       <a href={artwork.objectURL}>
         <Image
-          src={artwork.primaryImageSmall || artwork.primaryImage}
+          src={
+            artwork.primaryImageSmall ||
+            artwork.primaryImage
+          }
           className="artwork"
           centered
         />
