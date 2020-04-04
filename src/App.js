@@ -15,36 +15,12 @@ import ArtController from './ArtController'
 // import Logo from '../public/logo/artizan_logo.png'
 
 function App() {
-  /*
-  * states
-  */
-  const [subscription, setSubscription] = useState({ user: '', favorites: [] })
-  const [isLoading, setIsLoading] = useState(true)
-  const [isTicking, setIsTicking] = useState(true)
-  const [progress, setProgress] = useState(0)
-  const [collection, setCollection] = useState([])
-  const [artId, setArtId] = useState()
-
-  /* 
-  * Handlers
-  */
-  const API_URL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
-  const tickHandler = () => setIsTicking(!isTicking)
-  const skipHandler = () => {
-    setIsLoading(true)
-    setIsTicking(true)
-    setArtId(newID)
-  }
-
-  /*
-  * Helpers
-  */
 
   // Generate new ID to fetch and art piece
   const newID = () => Math.floor(Math.random() * 500000) + 1 // generate new id to fetch
 
   /* 
-  * Fetching Data
+  * Device Type
   * Roughly determine the device type visiting our app
   */
   const getDeviceType = () => {
@@ -55,6 +31,26 @@ function App() {
     } else {
       return 'Mobile'
     }
+  }
+
+  /*
+  * states
+  */
+  const [isLoading, setIsLoading] = useState(true)
+  const [isTicking, setIsTicking] = useState(true)
+  const [progress, setProgress] = useState(0)
+  const [collection, setCollection] = useState([])
+  const [artId, setArtId] = useState(newID)
+
+  /* 
+  * Handlers
+  */
+  const API_URL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
+  const tickHandler = () => setIsTicking(!isTicking)
+  const skipHandler = () => {
+    setIsLoading(true)
+    setIsTicking(true)
+    setArtId(newID)
   }
 
   /* 
