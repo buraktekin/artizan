@@ -1,15 +1,16 @@
 {
-  "homepage": "https://github.com/buraktekin/artizan#readme",
+  "homepage": "http://buraktekin.github.io/artizan",
   "name": "artizan",
   "version": "1.0.0",
   "description": "An application that creates automatic posts in twitter which contains artistic patrimonies",
   "main": "./src/index.js",
   "scripts": {
+    "iamdesperate": "rm -rf node_modules && yarn",
     "clear-build-cache": "rm -rf .cache/ build/",
-    "start": "parcel ./public/index.html",
-    "test": "npm run test",
-    "build": "react-scripts build",
-    "predeploy": "npm run build",
+    "start": "parcel public/index.html",
+    "test": "yarn run test",
+    "build": "parcel build public/index.html --out-dir build --public-url /artizan",
+    "predeploy": "rm -rf build && yarn run build",
     "deploy": "gh-pages -d build"
   },
   "repository": {
@@ -44,16 +45,16 @@
     "babel-preset-env": "^1.7.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "firebase": "^7.13.1",
     "lodash": "^4.17.15",
-    "parcel-bundler": "^1.12.4",
     "path": "^0.12.7",
     "prettier": "^1.18.2",
     "puppeteer": "^2.0.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "react-scripts": "^3.4.1",
+    "react-transition-group": "^4.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "twitter": "^1.7.1",
@@ -67,7 +68,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0",
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "parcel-bundler": "^1.12.4"
   },
   "browserslist": {
     "production": [
