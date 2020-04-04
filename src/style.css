@@ -67,6 +67,7 @@ table>tbody>tr>td:nth-child(2) {
 }
 
 .ui.container {
+  height: 100%;
   position: relative;
 }
 
@@ -87,14 +88,12 @@ table>tbody>tr>td:nth-child(2) {
 }
 
 .ui.grid>.row.head {
-  height: 20vh !important;
-  z-index: -1;
+  margin: 0 !important;
   align-items: flex-end !important;
   justify-content: center !important;
 }
 
 .ui.grid>.row.body {
-  height: 80vh;
 	width: 100%;
   padding: 0 !important;
   margin: 0 !important;
@@ -103,7 +102,7 @@ table>tbody>tr>td:nth-child(2) {
 }
 
 .ui.grid>.row.timer-bar {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: -1px;
   right: -1px;
@@ -138,14 +137,10 @@ table>tbody>tr>td:nth-child(2) {
   transition: 0.5s;
 }
 
-.ui.page-controls {
-  position: absolute;
-  display: flex;
+.ui.social-controls {
   flex: 1;
-  top: 1rem;
-  right: 0;
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  margin-bottom: 1rem !important;
 }
 
 .ui.table {
@@ -178,6 +173,24 @@ table>tbody>tr>td:nth-child(2) {
   background: transparent !important;
 }
 
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
 .ui.dimmer {
   width: 100%;
   height: 100vh !important;
@@ -194,9 +207,8 @@ table>tbody>tr>td:nth-child(2) {
 
 @media only screen and (min-width: 768px) {
   .infoWrapper {
-    min-width: 360px;
-    max-width: 480px;
-    margin-top: 1.5rem !important;
+    width: 400px;
+    margin: 1rem 0 !important;
   }
   .row--info {
     align-items: flex-end !important;
@@ -213,10 +225,6 @@ table>tbody>tr>td:nth-child(2) {
 		margin: 0;
 	}
 
-	.ui.horizontally.divided.grid {
-    padding: 2rem !important;
-  }
-
   .item__fluid > a{
     text-align: center !important;
   }
@@ -232,6 +240,10 @@ table>tbody>tr>td:nth-child(2) {
 }
 
 @media only screen and (max-width: 480px) {
+  .ui.container {
+    width: 100% !important;
+    margin: 0 !important;
+  }
   .brand{
     font-size: 4rem;
   }
@@ -239,5 +251,11 @@ table>tbody>tr>td:nth-child(2) {
     max-width: 100%;
     margin-top: 1rem !important;
     box-shadow: 1px 2px 10px rgba(0,0,0,0.8);
+  }
+}
+
+@media only screen and (min-height: 1200px) {
+  .ui.image.artwork {
+    max-height: 100%;
   }
 }
