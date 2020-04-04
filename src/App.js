@@ -26,30 +26,28 @@ function App() {
   const [artId, setArtId] = useState()
 
   /* 
-  * Handlers & Constants
+  * Handlers
   */
   const API_URL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
   const tickHandler = () => setIsTicking(!isTicking)
   const skipHandler = () => {
     setIsLoading(true)
     setIsTicking(true)
-    setArtId(newId)
+    setArtId(newID)
   }
 
   /*
   * Helpers
   */
-  function newId() {
-    /*
-    * Generate new ID to fetch and art piece
-    */
-    return Math.floor(Math.random() * 500000) + 1 // generate new id to fetch
-  }
 
-  function getDeviceType() {
-    /* 
-    * Roughly determine the device type visiting our app
-    */
+  // Generate new ID to fetch and art piece
+  const newID = () => Math.floor(Math.random() * 500000) + 1 // generate new id to fetch
+
+  /* 
+  * Fetching Data
+  * Roughly determine the device type visiting our app
+  */
+  const getDeviceType = () => {
     if (window.innerWidth > 991) {
       return 'Desktop'
     } else if (window.innerWidth > 767) {
@@ -60,29 +58,40 @@ function App() {
   }
 
   /* 
-  * Subscription Control
+  * Fetching Data
+  * fetch data asyncronously
   */
-  const subscriptionHandler = (email, favorite) => {
-    setSubscription({ user: email, favorites: [...subscription.favorites, favorite] })
-    console.log("USER: ", subscription)
-  }
-  const writeUserData = () => {
-    Firebase.database().ref('/').set(subscription);
-    console.log('DATA SAVED');
-  }
-  const getUserData = () => {
-    let ref = Firebase.database().ref('/');
-    ref.on('value', snapshot => {
-      const state = snapshot.val();
-      setSubscription(state);
-    });
-    console.log('DATA RETRIEVED');
+  const getData = async () => {
+    const artURL = API_URL + artId
+    await fetch(artURL, { timeout: 5000 })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Not 200 response")
+        } else {
+          return res.json()
+        }
+      })
+      .then((res) => {
+        // If prior fields are empty, rerun fetch process
+        if (!(res && res.tags && res.title && res.primaryImage)) {
+          throw new Error(`One or more prior information are missing for ID: ${artId}`)
+        } else {
+          res.device = getDeviceType()
+          setCollection(res) // pass fetched data to state
+          setProgress(0) // reset progress
+          setIsLoading(false)
+        }
+      })
+      .catch((err) => {
+        console.error(`Caught an error: ${err}, Trying again...`)
+        setArtId(newID)
+      })
   }
 
   /* 
-  * Progress Bar
-  * Set interval to tick and change progress bar value per sec.
-  */
+ * Progress Bar
+ * Set interval to tick and change progress bar value per sec.
+ */
   useEffect(() => {
     const interval = setInterval(() => {
       if (isTicking) {
@@ -91,50 +100,12 @@ function App() {
     }, 1000)
     // After 30secs get another art piece
     if (progress > 100) {
-      setArtId(newId)
+      setArtId(newID)
       setIsLoading(true) // show loading window
+      getData()
     }
     return () => clearInterval(interval) // stop ticking 
   }, [isTicking, progress])
-
-  /*
-  * Fetch data
-  */
-  useEffect(() => {
-    const artURL = API_URL + artId
-    async function getData() {
-      /*
-      * fetch data asyncronously
-      */
-      await fetch(
-        artURL,
-        { timeout: 5000 }
-      )
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Not 200 response")
-          } else {
-            return res.json()
-          }
-        })
-        .then((res) => {
-          // If prior fields are empty, rerun fetch process
-          if (!(res && res.tags && res.title && res.primaryImage)) {
-            throw new Error(`One or more prior information are missing for ID: ${artId}`)
-          } else {
-            res.device = getDeviceType()
-            setCollection(res) // pass fetched data to state
-            setProgress(0) // reset progress
-            setIsLoading(false)
-          }
-        })
-        .catch((err) => {
-          console.error(`Caught an error: ${err}, Trying again...`)
-          setArtId(newId)
-        })
-    }
-    getData()
-  }, [artId])
 
   /*
   * Render View
@@ -155,10 +126,7 @@ function App() {
               <ArtController
                 handlers={{
                   skipHandler,
-                  tickHandler,
-                  subscriptionHandler,
-                  writeUserData,
-                  getUserData
+                  tickHandler
                 }}
                 status={isTicking}
               />
