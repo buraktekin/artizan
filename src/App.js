@@ -15,9 +15,25 @@ import ArtController from './ArtController'
 // import Logo from '../public/logo/artizan_logo.png'
 
 function App() {
+  /*
+  * states
+  */
+  const [isLoading, setIsLoading] = useState(true)
+  const [isTicking, setIsTicking] = useState(true)
+  const [progress, setProgress] = useState(0)
+  const [collection, setCollection] = useState([])
+  const [artId, setArtId] = useState(187802)
 
-  // Generate new ID to fetch and art piece
-  const newID = () => Math.floor(Math.random() * 500000) + 1 // generate new id to fetch
+  /* 
+  * Handlers
+  */
+  const newID = () => Math.floor(Math.random() * 500000) + 1 // Generate new ID to fetch and art piece
+  const API_URL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
+  const tickHandler = () => setIsTicking(!isTicking)
+  const skipHandler = () => {
+    setIsLoading(true)
+    setArtId(newID)
+  }
 
   /* 
   * Device Type
@@ -31,26 +47,6 @@ function App() {
     } else {
       return 'Mobile'
     }
-  }
-
-  /*
-  * states
-  */
-  const [isLoading, setIsLoading] = useState(true)
-  const [isTicking, setIsTicking] = useState(true)
-  const [progress, setProgress] = useState(0)
-  const [collection, setCollection] = useState([])
-  const [artId, setArtId] = useState(newID)
-
-  /* 
-  * Handlers
-  */
-  const API_URL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
-  const tickHandler = () => setIsTicking(!isTicking)
-  const skipHandler = () => {
-    setIsLoading(true)
-    setIsTicking(true)
-    setArtId(newID)
   }
 
   /* 
@@ -76,6 +72,7 @@ function App() {
           setCollection(res) // pass fetched data to state
           setProgress(0) // reset progress
           setIsLoading(false)
+          setIsTicking(true)
         }
       })
       .catch((err) => {
@@ -93,15 +90,19 @@ function App() {
       if (isTicking) {
         setProgress(progress + 3)
       }
+      // After 30secs get another art piece
+      if (progress > 100) {
+        setIsTicking(false)
+        setArtId(newID)
+        setIsLoading(true) // show loading window
+      }
     }, 1000)
-    // After 30secs get another art piece
-    if (progress > 100) {
-      setArtId(newID)
-      setIsLoading(true) // show loading window
-      getData()
-    }
     return () => clearInterval(interval) // stop ticking 
   }, [isTicking, progress])
+
+  useEffect(() => {
+    getData()
+  }, [artId])
 
   /*
   * Render View
