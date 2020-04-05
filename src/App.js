@@ -18,16 +18,17 @@ function App() {
   /*
   * states
   */
+  const newID = () => Math.floor(Math.random() * 500000) + 1 // Generate new ID to fetch and art piece
   const [isLoading, setIsLoading] = useState(true)
   const [isTicking, setIsTicking] = useState(true)
   const [progress, setProgress] = useState(0)
   const [collection, setCollection] = useState([])
-  const [artId, setArtId] = useState(187802)
+  const [artId, setArtId] = useState(newID)
 
   /* 
   * Handlers
   */
-  const newID = () => Math.floor(Math.random() * 500000) + 1 // Generate new ID to fetch and art piece
+
   const API_URL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
   const tickHandler = () => setIsTicking(!isTicking)
   const skipHandler = () => {
