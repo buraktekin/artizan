@@ -25,7 +25,7 @@ function ArtButtonGroup(props) {
   }, [socialCounter.likes])
 
 
-  // @TODO: REPETITIVE CODE!!! CLEAN HERE LATER
+  // TODO: REPETITIVE CODE!!! CLEAN HERE LATER
   const handleLike = () => {
     setSocialCounter((prevState) => ({ ...prevState, likes: prevState.likes + 1 }))
     dbRef.set({
@@ -65,6 +65,15 @@ function ArtButtonGroup(props) {
         onClick={handleLike}
       />
     </ButtonGroup>
+
+    /*
+      TODO: makes trouble on function passing. Save it for later
+      <ShareButtonGroup
+        shares={socialCounter.shares}
+        handlers={handleShare}
+        shareUrl={shareUrl}
+      />
+    */
   )
 }
 
