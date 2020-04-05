@@ -24,8 +24,10 @@ function ArtButtonGroup(props) {
     handleView()
   }, [socialCounter.likes])
 
+
+  // @TODO: REPETITIVE CODE!!! CLEAN HERE LATER
   const handleLike = () => {
-    setSocialCounter((prevState) => ({ ...prevState, likes: socialCounter.likes + 1 }))
+    setSocialCounter((prevState) => ({ ...prevState, likes: prevState.likes + 1 }))
     dbRef.set({
       id: props.objectID,
       interactions: socialCounter
@@ -41,7 +43,7 @@ function ArtButtonGroup(props) {
   }
 
   const handleView = () => {
-    setSocialCounter((prevState) => ({ ...prevState, shares: socialCounter.views + 1 }))
+    setSocialCounter((prevState) => ({ ...prevState, shares: prevState.views + 1 }))
     dbRef.set({
       id: props.objectID,
       interactions: socialCounter
