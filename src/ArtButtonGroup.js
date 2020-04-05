@@ -1,40 +1,52 @@
 import React, { useState, useEffect } from "react"
 import { Button, ButtonGroup } from "semantic-ui-react"
-
+import ShareButtonGroup from "./ShareButtonGroup"
 import database from './firebase'
 
-/* 
- * Subscription Control
- */
-const getUserData = () => {
-  let ref = database.ref('/');
-  ref.on('value', snapshot => {
-    const state = snapshot.val();
-    setSubscription(state);
-  });
-  console.log('DATA RETRIEVED');
-}
 
-const ArtButtonGroup = (props) => {
+function ArtButtonGroup(props) {
+  const [socialCounter, setSocialCounter] = useState({ likes: 0, shares: 0, views: 0 })
+  const shareUrl = `${window.location.href}${props.objectID}`
   const dbRef = database.artworks(props.objectID)
-  const [socialCounter, setSocialCounter] = useState({
-    likes: 0,
-    shares: 0,
-    views: 0
-  })
+
+  useEffect(() => {
+    function getUserData() {
+      dbRef.once('value')
+        .then(function (snapshot) {
+          let data = snapshot.val()
+          if (data.hasOwnProperty('interactions')) {
+            data = data.interactions
+            setSocialCounter(data)
+          }
+        })
+    }
+    getUserData()
+    handleView()
+  }, [socialCounter.likes])
 
   const handleLike = () => {
-    setSocialCounter({ ...socialCounter, likes: socialCounter.likes + 1 })
-    console.log(socialCounter)
+    setSocialCounter((prevState) => ({ ...prevState, likes: socialCounter.likes + 1 }))
     dbRef.set({
       id: props.objectID,
       interactions: socialCounter
     });
   }
 
-  // useEffect(() => {
-  //   setSocialCounter({ ...socialCounter, views: socialCounter.views + 1 })
-  // }, [])
+  const handleShare = () => {
+    setSocialCounter((prevState) => ({ ...prevState, shares: prevState.shares + 1 }))
+    dbRef.set({
+      id: props.objectID,
+      interactions: socialCounter
+    });
+  }
+
+  const handleView = () => {
+    setSocialCounter((prevState) => ({ ...prevState, shares: socialCounter.views + 1 }))
+    dbRef.set({
+      id: props.objectID,
+      interactions: socialCounter
+    });
+  }
 
   return (
     <ButtonGroup className="social-controls" icon>
@@ -49,19 +61,6 @@ const ArtButtonGroup = (props) => {
           content: socialCounter.likes
         }}
         onClick={handleLike}
-      />
-      <Button
-        basic
-        color='blue'
-        content='Share'
-        icon='paper plane'
-        label={{
-          as: 'a',
-          basic: true,
-          color: 'blue',
-          pointing: 'left',
-          content: '2,048',
-        }}
       />
     </ButtonGroup>
   )
