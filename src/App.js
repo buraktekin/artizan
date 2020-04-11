@@ -7,7 +7,6 @@ import {
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import './style.css'
-import Firebase from 'firebase';
 
 import Art from './Art'
 import ArtMenu from './Menu'
@@ -23,7 +22,7 @@ function App() {
   const [isTicking, setIsTicking] = useState(true)
   const [progress, setProgress] = useState(0)
   const [collection, setCollection] = useState([])
-  const [artId, setArtId] = useState(newID)
+  const [artId, setArtId] = useState(70251)
 
   /* 
   * Handlers
@@ -71,9 +70,9 @@ function App() {
         } else {
           res.device = getDeviceType()
           setCollection(res) // pass fetched data to state
+          setIsTicking(true)
           setProgress(0) // reset progress
           setIsLoading(false)
-          setIsTicking(true)
         }
       })
       .catch((err) => {
@@ -94,13 +93,16 @@ function App() {
       // After 30secs get another art piece
       if (progress > 100) {
         setIsTicking(false)
-        setArtId(newID)
         setIsLoading(true) // show loading window
+        setArtId(newID)
       }
     }, 1000)
     return () => clearInterval(interval) // stop ticking 
   }, [isTicking, progress])
 
+  /*
+  * ComponentDidMount: Get An Art Collection
+  */
   useEffect(() => {
     getData()
   }, [artId])
