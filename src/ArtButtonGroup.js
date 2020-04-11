@@ -5,7 +5,7 @@ import database from './firebase'
 
 function ArtButtonGroup(props) {
   let socialCounter = useRef({})
-  const shareUrl = `${window.location.href}${props.objectID}`
+  const shareUrl = `${window.location.hostname}/artpiece/${props.objectID}`
   const dbRef = database.artworks(props.objectID)
   dbRef.once('value', querySnapShot => {
     socialCounter.current = querySnapShot.val() ? querySnapShot.val() : { likes: 0, shares: 0, views: 0 }
@@ -41,8 +41,6 @@ function ArtButtonGroup(props) {
       views: socialCounter.current.views
     });
   }
-
-  handleView
 
   return (
     <ButtonGroup className="social-controls" icon>
