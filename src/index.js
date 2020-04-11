@@ -1,6 +1,6 @@
 import React from "react"
 import {
-  BrowserRouter as Router,
+  HashRouter,
   Switch,
   Route,
   Link,
@@ -13,16 +13,16 @@ import ArtPiece from './ArtPiece'
 
 
 ReactDOM.render(
-  <Router>
+  <HashRouter basename='/artizan'>
     <Switch>
-      <Route exact path='/artizan'>
+      <Route exact path='/'>
         <App dynamic={true} />
       </Route>
-      <Route path='/artizan/artpiece'>
+      <Route path='/:artPieceID'>
         <ArtPiece />
       </Route>
     </Switch>
-  </Router>
+  </HashRouter>
   ,
   document.getElementById('root')
 )
