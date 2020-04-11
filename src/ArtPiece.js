@@ -1,19 +1,21 @@
 import React from "react"
-import { Grid } from "semantic-ui-react";
-import Art from './Art'
-import ArtMenu from './Menu'
+import {
+  Switch,
+  Route,
+  useRouteMatch,
+} from "react-router-dom";
+
+import App from './App'
 
 const ArtPiece = () => {
+  let match = useRouteMatch()
   return (
-    <>
-      <Grid columns={1} divided padded>
-        <Grid.Row className='head' stretched>
-          <ArtMenu />
-        </Grid.Row>
-        <Grid.Row className='body' stretched>
-          <Art collection={collection} />
-        </Grid.Row>
-      </Grid>
-    </>
+    <Switch>
+      <Route path={`${match.path}/:artPieceID`}>
+        <App dynamic={false} />
+      </Route>
+    </Switch>
   )
 }
+
+export default ArtPiece

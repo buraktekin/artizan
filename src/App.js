@@ -4,26 +4,28 @@ import {
   Loader,
   Dimmer,
   Progress,
+  Container,
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-import './style.css'
+import { useParams } from "react-router-dom";
 
+import './style.css'
 import Art from './Art'
 import ArtMenu from './Menu'
 import ArtController from './ArtController'
 // import Logo from '../public/logo/artizan_logo.png'
 
-function App() {
+function App(props) {
   /*
   * states
   */
+  let { artPieceID } = useParams();
   const newID = () => Math.floor(Math.random() * 500000) + 1 // Generate new ID to fetch and art piece
   const [isLoading, setIsLoading] = useState(true)
   const [isTicking, setIsTicking] = useState(true)
   const [progress, setProgress] = useState(0)
   const [collection, setCollection] = useState([])
-  const [artId, setArtId] = useState(70251)
-
+  const [artId, setArtId] = useState(artPieceID || newID)
   /* 
   * Handlers
   */
@@ -39,7 +41,7 @@ function App() {
   * Device Type
   * Roughly determine the device type visiting our app
   */
-  const getDeviceType = () => {
+  const device = () => {
     if (window.innerWidth > 991) {
       return 'Desktop'
     } else if (window.innerWidth > 767) {
@@ -68,7 +70,7 @@ function App() {
         if (!(res && res.tags && res.title && res.primaryImage)) {
           throw new Error(`One or more prior information are missing for ID: ${artId}`)
         } else {
-          res.device = getDeviceType()
+          res.device = device
           setCollection(res) // pass fetched data to state
           setIsTicking(true)
           setProgress(0) // reset progress
@@ -77,7 +79,9 @@ function App() {
       })
       .catch((err) => {
         console.error(`Caught an error: ${err}, Trying again...`)
-        setArtId(newID)
+        if (props.dynamic) {
+          setArtId(newID)
+        }
       })
   }
 
@@ -90,11 +94,13 @@ function App() {
       if (isTicking) {
         setProgress(progress + 3)
       }
-      // After 30secs get another art piece
-      if (progress > 100) {
-        setIsTicking(false)
-        setIsLoading(true) // show loading window
-        setArtId(newID)
+      if (props.dynamic) {
+        // After 30secs get another art piece
+        if (progress > 100) {
+          setIsTicking(false)
+          setIsLoading(true) // show loading window
+          setArtId(newID)
+        }
       }
     }, 1000)
     return () => clearInterval(interval) // stop ticking 
@@ -121,22 +127,31 @@ function App() {
     ) : (
         <>
           <Grid columns={1} divided padded>
-            <Grid.Row className='timer-bar'>
-              <Progress percent={progress} size='tiny' color='violet' />
-              <ArtController
-                handlers={{
-                  skipHandler,
-                  tickHandler
-                }}
-                status={isTicking}
-              />
-            </Grid.Row>
-            <Grid.Row className='head' stretched>
-              <ArtMenu />
-            </Grid.Row>
-            <Grid.Row className='body' stretched>
-              <Art collection={collection} />
-            </Grid.Row>
+            {props.dynamic ?
+              (
+                <Grid.Row className='timer-bar'>
+                  <Progress percent={progress} size='tiny' color='violet' />
+                  <ArtController
+                    handlers={{
+                      skipHandler,
+                      tickHandler,
+                    }}
+                    device={device}
+                    status={isTicking}
+                  />
+                </Grid.Row>
+              ) : (
+                null
+              )
+            }
+            <Container>
+              <Grid.Row className='head' stretched>
+                <ArtMenu />
+              </Grid.Row>
+              <Grid.Row className='body' stretched>
+                <Art collection={collection} />
+              </Grid.Row>
+            </Container>
           </Grid>
         </>
       )

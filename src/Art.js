@@ -19,20 +19,18 @@ const Art = (props) => {
   )
 
   return (
-    <>
-      <Grid columns={2} divided centered stackable stretched>
-        <Grid.Row>
-          <ArtWork artwork={artwork} />
-        </Grid.Row>
-        <Grid.Row className='row--info'>
-          <Segment className="infoWrapper" stackeds="true">
-            <ArtButtonGroup objectID={collection.objectID} />
-            <ArtHeader header={header} />
-            <ArtCard collection={collection} />
-          </Segment>
-        </Grid.Row>
-      </Grid>
-    </>
+    <Grid.Column stretched>
+      <Grid.Row className='row--image'>
+        <ArtWork artwork={artwork} />
+      </Grid.Row>
+      <Grid.Row className='row--info'>
+        <Segment className="infoWrapper" stackeds="true">
+          <ArtHeader header={header} />
+          <ArtButtonGroup objectID={collection.objectID} />
+          <ArtCard collection={collection} />
+        </Segment>
+      </Grid.Row>
+    </Grid.Column>
   )
 }
 
