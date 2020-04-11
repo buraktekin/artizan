@@ -1,5 +1,6 @@
 import React from "react"
 import { Image } from "semantic-ui-react"
+import { Link } from "react-router-dom";
 
 export default class ArtWork extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class ArtWork extends React.Component {
   }
 
   render() {
-    const artwork = this.props.artwork
+    const { artwork } = this.props
     return (
       <a href={artwork.objectURL}>
         <Image

@@ -5,7 +5,7 @@ const ArtMenu = () => {
   return (
     <Menu borderless>
       <Menu.Item name="logo">
-        <a href="/artizan">
+        <a href="/">
           <h3 className="brand">artizan</h3>
         </a>
       </Menu.Item>

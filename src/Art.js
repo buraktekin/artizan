@@ -11,7 +11,7 @@ const Art = (props) => {
   const { collection } = props
   const artwork = _.pick(
     collection,
-    ["objectURL", "primaryImage", "primaryImageSmall"]
+    ["objectID", "objectURL", "primaryImage", "primaryImageSmall"]
   )
   const header = _.pick(
     collection,

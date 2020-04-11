@@ -13,7 +13,7 @@ import ArtPiece from './ArtPiece'
 
 
 ReactDOM.render(
-  <HashRouter basename='/artizan'>
+  <HashRouter basename='/'>
     <Switch>
       <Route exact path='/'>
         <App dynamic={true} />

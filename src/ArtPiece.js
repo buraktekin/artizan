@@ -11,7 +11,7 @@ const ArtPiece = () => {
   let match = useRouteMatch()
   return (
     <Switch>
-      <Route path={`${match.path}/:artPieceID`}>
+      <Route path={`${match.path}`}>
         <App dynamic={false} />
       </Route>
     </Switch>
