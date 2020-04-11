@@ -15,7 +15,7 @@ import ArtPiece from './ArtPiece'
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route exact path='/'>
+      <Route exact path='/artizan'>
         <App dynamic={true} />
       </Route>
       <Route path='/artpiece'>
