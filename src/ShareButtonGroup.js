@@ -11,7 +11,8 @@ import {
 } from "react-share"
 
 const ShareButtonGroup = (props) => {
-  const { shares, shareUrl, handlers } = props
+  const { shares, id, handlers } = props
+  const shareURL = 'https://buraktekin.github.io/artizan/artpiece/' + id
 
   return (
     <Popup wide trigger={
@@ -31,18 +32,18 @@ const ShareButtonGroup = (props) => {
     } on='click'>
       <Grid divided columns='equal'>
         <Grid.Column>
-          <WhatsappShareButton url={shareUrl}>
-            <WhatsappIcon size={32} round={true} />
+          <WhatsappShareButton url={shareURL}>
+            <WhatsappIcon size={32} round={true} onClick={handlers.handleShare} />
           </WhatsappShareButton>
         </Grid.Column>
         <Grid.Column>
-          <FacebookShareButton url={shareUrl}>
-            <FacebookIcon size={32} round={true} />
+          <FacebookShareButton url={shareURL}>
+            <FacebookIcon size={32} round={true} onClick={handlers.handleShare} />
           </FacebookShareButton>
         </Grid.Column>
         <Grid.Column>
-          <TwitterShareButton url={shareUrl} onClick={handlers.handleShare}>
-            <TwitterIcon size={32} round={true} />
+          <TwitterShareButton url={shareURL}>
+            <TwitterIcon size={32} round={true} onClick={handlers.handleShare} />
           </TwitterShareButton>
         </Grid.Column>
       </Grid>
