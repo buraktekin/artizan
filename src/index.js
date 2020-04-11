@@ -9,8 +9,20 @@ import {
 } from "react-router-dom";
 import ReactDOM from "react-dom"
 import App from './App'
+import ArtPiece from './ArtPiece'
+
 
 ReactDOM.render(
-  <App />,
+  <Router>
+    <Switch>
+      <Route exact path='/'>
+        <App dynamic={true} />
+      </Route>
+      <Route path='/artpiece'>
+        <ArtPiece />
+      </Route>
+    </Switch>
+  </Router>
+  ,
   document.getElementById('root')
 )
