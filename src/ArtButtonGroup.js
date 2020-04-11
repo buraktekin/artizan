@@ -1,54 +1,48 @@
-import React, { useState, useEffect } from "react"
+import React, { useRef } from "react"
 import { Button, ButtonGroup } from "semantic-ui-react"
 import ShareButtonGroup from "./ShareButtonGroup"
 import database from './firebase'
 
-
 function ArtButtonGroup(props) {
-  const [socialCounter, setSocialCounter] = useState({ likes: 0, shares: 0, views: 0 })
+  let socialCounter = useRef({})
   const shareUrl = `${window.location.href}${props.objectID}`
   const dbRef = database.artworks(props.objectID)
-
-  useEffect(() => {
-    function getUserData() {
-      dbRef.once('value')
-        .then(function (snapshot) {
-          let data = snapshot.val()
-          if (data.hasOwnProperty('interactions')) {
-            data = data.interactions
-            setSocialCounter(data)
-          }
-        })
-    }
-    getUserData()
-    handleView()
-  }, [socialCounter.likes])
-
+  dbRef.once('value', querySnapShot => {
+    socialCounter.current = querySnapShot.val() ? querySnapShot.val() : { likes: 0, shares: 0, views: 0 }
+  })
 
   // TODO: REPETITIVE CODE!!! CLEAN HERE LATER
   const handleLike = () => {
-    setSocialCounter((prevState) => ({ ...prevState, likes: prevState.likes + 1 }))
+    socialCounter.current = { ...socialCounter.current, likes: socialCounter.current.likes + 1 }
     dbRef.set({
       id: props.objectID,
-      interactions: socialCounter
+      likes: socialCounter.current.likes,
+      shares: socialCounter.current.shares,
+      views: socialCounter.current.views
     });
   }
 
   const handleShare = () => {
-    setSocialCounter((prevState) => ({ ...prevState, shares: prevState.shares + 1 }))
+    socialCounter = { ...socialCounter, shares: socialCounter.current.likes + 1 }
     dbRef.set({
       id: props.objectID,
-      interactions: socialCounter
+      likes: socialCounter.current.likes,
+      shares: socialCounter.current.shares,
+      views: socialCounter.current.views
     });
   }
 
   const handleView = () => {
-    setSocialCounter((prevState) => ({ ...prevState, shares: prevState.views + 1 }))
+    socialCounter = { ...socialCounter, views: socialCounter.current.likes + 1 }
     dbRef.set({
       id: props.objectID,
-      interactions: socialCounter
+      likes: socialCounter.current.likes,
+      shares: socialCounter.current.shares,
+      views: socialCounter.current.views
     });
   }
+
+  handleView
 
   return (
     <ButtonGroup className="social-controls" icon>
@@ -60,19 +54,20 @@ function ArtButtonGroup(props) {
           basic: true,
           color: 'red',
           pointing: 'left',
-          content: socialCounter.likes
+          content: socialCounter.current.likes
         }}
         onClick={handleLike}
+      />
+
+      <ShareButtonGroup
+        shares={socialCounter.current.shares}
+        handlers={handleShare}
+        shareUrl={shareUrl}
       />
     </ButtonGroup>
 
     /*
-      TODO: makes trouble on function passing. Save it for later
-      <ShareButtonGroup
-        shares={socialCounter.shares}
-        handlers={handleShare}
-        shareUrl={shareUrl}
-      />
+      
     */
   )
 }

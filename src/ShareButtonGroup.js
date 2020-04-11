@@ -33,19 +33,16 @@ const ShareButtonGroup = (props) => {
         <Grid.Column>
           <WhatsappShareButton url={shareUrl}>
             <WhatsappIcon size={32} round={true} />
-            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
           </WhatsappShareButton>
         </Grid.Column>
         <Grid.Column>
           <FacebookShareButton url={shareUrl}>
             <FacebookIcon size={32} round={true} />
-            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
           </FacebookShareButton>
         </Grid.Column>
         <Grid.Column>
           <TwitterShareButton url={shareUrl} onClick={handlers.handleShare}>
             <TwitterIcon size={32} round={true} />
-            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
           </TwitterShareButton>
         </Grid.Column>
       </Grid>
