@@ -12,7 +12,7 @@ import {
 
 const ShareButtonGroup = (props) => {
   const { shares, id, handlers } = props
-  const shareURL = 'https://buraktekin.github.io/artizan/artpiece/' + id
+  const shareURL = 'https://buraktekin.github.io/artizan/#/' + id
 
   return (
     <Popup wide trigger={
