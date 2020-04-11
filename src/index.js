@@ -18,7 +18,7 @@ ReactDOM.render(
       <Route exact path='/artizan'>
         <App dynamic={true} />
       </Route>
-      <Route path='/artpiece'>
+      <Route path='/artizan/artpiece'>
         <ArtPiece />
       </Route>
     </Switch>
