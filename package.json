@@ -41,7 +41,7 @@
     "@babel/runtime": "^7.9.2",
     "@stardust-ui/docs-components": "^0.40.0",
     "acorn": "^7.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-preset-env": "^1.7.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
